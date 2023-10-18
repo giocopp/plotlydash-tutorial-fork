@@ -1,8 +1,8 @@
 # 10-plotlydash-coppola-shejwal-chen
 
-https://hertieschool-my.sharepoint.com/personal/216697_students_hertie-school_org/_layouts/15/onedrive.aspx?ga=1&id=%2Fpersonal%2F216697%5Fstudents%5Fhertie%2Dschool%5Forg%2FDocuments%2FIDS%20Workshop%20%2D%20Plotly%2DDash 
+Link to OneDrive: https://hertieschool-my.sharepoint.com/personal/216697_students_hertie-school_org/_layouts/15/onedrive.aspx?ga=1&id=%2Fpersonal%2F216697%5Fstudents%5Fhertie%2Dschool%5Forg%2FDocuments%2FIDS%20Workshop%20%2D%20Plotly%2DDash 
 
-### IDS “Plotly and Dash” Workshop schedule.
+### IDS “Plotly and Dash” Workshop.
 
 ### *Pre-recorded and Live Session Presentation Structure (15 minutes):*
 1. Introduction (2 minutes) Brief on data visualization:  Data visualization is a means to understand complex data and communicate insights effectively, revealing the hidden patterns and trends that wouldn't be obvious in tabular data, turning raw data into information.
