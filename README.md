@@ -2,7 +2,7 @@
 
 ### IDS “Plotly and Dash” Workshop schedule.
 
-# *Pre-recorded and Live Session Presentation Structure (15 minutes):*
+### *Pre-recorded and Live Session Presentation Structure (15 minutes):*
 1. Introduction (2 minutes) Brief on data visualization:  Data visualization is a means to understand complex data and communicate insights effectively, revealing the hidden patterns and trends that wouldn't be obvious in tabular data, turning raw data into information.
    Why interactive graphics? Importance in Data Science
    - Engagement: Makes data come alive (interactive) and is more engaging for users. This increase understanding and retention.
@@ -55,12 +55,12 @@
    Importance of interactive visualizations in today's data-rich world and digital resources.
    The edge it provides in data storytelling (newspaper, statistical repositories, websites, research) and decision-making.
 
-# *Live Session Specifics:*
+### *Live Session Specifics:*
 - Presentation (15 minutes)
   Deliver the live version of the above presentation (about 10-12 minutes): a recap of the pre-recorded presentation.
 - Q&A (5 minutes). 
 
-# *Live Tutorial with Dataset (20-25 minutes) Tutorial Breakdown:*
+### *Live Tutorial with Dataset (20-25 minutes) Tutorial Breakdown:*
 
 1. Setting up (1 minutes) Installing the required packages.
    
@@ -76,14 +76,14 @@
 6. Conclusion (2 minutes) Emphasize the importance of interactive visualizations. Encourage students to explore more features on their own.
 
 
-# GitHub Repository Structure:	
-# README.md: Follow the provided template.
+### GitHub Repository Structure:	
+### README.md: Follow the provided template.
 	Introduction
 	Session contents
 	Dataset information
 	Contributors
 	
-# Code:
+### Code:
 	basic_plotly.R: Basic visualization using Plotly.
 	interactive_plotly.R: Adding interactivity.
 	dash_dashboard.R: Creating a dashboard using Dash.
@@ -92,5 +92,5 @@
 	Links to official documentation, tutorials, and other useful resources on Plotly and Dash.
 
 
-# Dataset ideas:
+### Dataset ideas:
 Beer Consumption by US State: Package: beers in dataedu Description: This dataset provides details about beer consumption in US states, including craft beer production, overall beer consumption, and brewery count. Usage: Useful for sociological studies on drinking culture, regional preferences, or the rise of craft beer as a cultural phenomenon.  https://github.com/plotly/datasets/blob/master/beers.csv 
