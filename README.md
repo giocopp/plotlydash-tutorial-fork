@@ -22,7 +22,7 @@ In a data-intensive world, understanding and communicating complex data effectiv
 
 <br>
 
-## 📚 Session Contents
+## 📘 Session Contents
 
 - **Introduction to Data Visualization**
   - Importance of data visualization
