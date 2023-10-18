@@ -69,6 +69,7 @@ In a data-intensive world, understanding and communicating complex data effectiv
   - `interactive_plotly.R`: Steps to enhance the visualizations with interactivity.
   - `dash_dashboard.R`: Steps to craft an interactive dashboard using Dash.
   - `interactive_tutorial.Rmd`: Rmd script for the tutorial.
+  - `slides_workshop.Rmd`: Slides for the workshop presentation.
   - **Data**: If datasets outside of the mentioned packages are used, you'll find them here.
     (still to be populated)
 - **Resources**
