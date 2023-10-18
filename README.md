@@ -1,98 +1,90 @@
-# 10-plotlydash-coppola-shejwal-chen
+# IDS Workshop "Interactive Graphs with Plotly and Dash" 
+### by Giorgio, Gayatri and Lonny!
 
-Link to OneDrive: https://hertieschool-my.sharepoint.com/personal/216697_students_hertie-school_org/_layouts/15/onedrive.aspx?ga=1&id=%2Fpersonal%2F216697%5Fstudents%5Fhertie%2Dschool%5Forg%2FDocuments%2FIDS%20Workshop%20%2D%20Plotly%2DDash 
+<br>
 
-### IDS “Plotly and Dash” Workshop.
+Welcome to the GitHub repository for the IDS Workshop  "Interactive Graphs with Plotly and Dash". Dive into the fascinating world of interactive data visualization with this structured workshop, designed to introduce you to the powerful capabilities of Plotly and Dash in R.
 
-### *Pre-recorded and Live Session Presentation Structure (15 minutes):*
-1. Introduction (2 minutes) Brief on data visualization:  Data visualization is a means to understand complex data and communicate insights effectively, revealing the hidden patterns and trends that wouldn't be obvious in tabular data, turning raw data into information.
-   Why interactive graphics? Importance in Data Science
-   - Engagement: Makes data come alive (interactive) and is more engaging for users. This increase understanding and retention.
-   - Depth: Allows users to drill down and explore nuances, as interaction allows to create narratives more easily. Users can ask 'why' and get answers instantly by exploring the chart or graph.
-   - Decision-making: Facilitates more informed decisions. 
+<br>
 
+## 📑 Table of Contents
+- [Introduction](#introduction)
+- [Session Contents](#session-contents)
+- [Dataset Information](#dataset-information)
+- [Repository Structure](#repository-structure)
+- [Contributors](#contributors)
+- [Resources](#resources)
 
-2. Plotly Introduction (4 minutes)
-   What is Plotly? A powerful R library to create interactive and visually appealing graphs.
-   Advantages of using Plotly:
-   - Seamless integration with R
-   -  Diverse range of plots and customization (wide array of chart types with extensive customization options)
-   -  Web integration of graphs, makes visualization more accessible and intuitive.
-     
-  Quick visualization example. 
-  A cool, non-trivial, yet not too complex, visualization that encapsulate the power of Plotly. 
-  Create an “evolving story” where you can hover over bars (or whatever), see exact values, and track changes year by year (or category by category). 
+<br>
 
-    e.g.
-    Plotly Visualization Example with Beer Consumption by US State Data:
-    "Craft Beer Boom: A Journey Over Time"
-    Track the rise of craft beer production across the US over time.
-    Bar Chart Animation: A bar chart where each bar represents a state in the US, and the height of the bar shows the quantity of craft beer produced.
-    The animation showcases the growth year by year, depicting how the craft beer phenomenon spread across the US.
-    Interactivity Element: Hovering over bars shows exact production numbers for that year and state. A slider allows users to manually control the displayed year. 
+## 🌐 Introduction
+In a data-intensive world, understanding and communicating complex data effectively is crucial. This workshop introduces the importance of interactive graphics in data science and the capabilities of `Plotly` and `Dash`, two great tools for creating vibrant visual narratives.
 
-3. Introduction to Dash (4 minutes) What is Dash? Why integrate with Plotly?
-   A web application framework for R (and Python) that allows creating interactive, web-based data dashboards, turning your interactive plots into full-blown web applications.
-   Key features.
-   - HTML layout: Design your dashboard layout using simple HTML components, without having to write any actual HTML. Indeed, it structure dashboard components using a set of pre-defined HTML tags within R.
-   - Interactivity through callbacks: callbacks define interactive behavior by specifying how input changes should modify output components. Essentially, when changing a dropdown or move a slider, a callback updates a chart, text, or any other component in real-time.
-   - Integration with Plotly visualizations: Plotly charts can be easily included in Dash, making them part of an interactive dashboard where each component can talk to others.
-   
-     Quick interactive dashboard demo.
-     A cool, non-trivial yet not too complex dashboard with filters to visualize data that encapsulate the power of Dash.
-       e.g
-       Dash Interactive Dashboard with Beer Consumption by US State Data:
-       "US Beer Landscape: Exploring Preferences and Production
-       Dive into the intricacies of beer consumption in the US, exploring state preferences and the rise of craft beer
-       Main Visualization: A heatmap of the US where each state's color intensity represents beer consumption or brewery count
-       Secondary Visualization: A smaller pie chart or bar chart depicting the ratio of craft beer to overall beer production
-       Filters: Dropdowns for selecting specific years or types of beers, and a slider for brewery count
-       Interactivity: Selecting different filters updates both the heatmap and the secondary visualization. Hovering over states gives exact numbers and details.
+<br>
 
-4. Resources for Learning More and Best Practices (2 minutes)
-   Mention the provided resources.
+## 📚 Session Contents
 
-6. Closing Remarks (1 minute)
-   Importance/application of interactive visualization in (social) data science and data visualization.
-   Importance of interactive visualizations in today's data-rich world and digital resources.
-   The edge it provides in data storytelling (newspaper, statistical repositories, websites, research) and decision-making.
-
-### *Live Session Specifics:*
-- Presentation (15 minutes)
-  Deliver the live version of the above presentation (about 10-12 minutes): a recap of the pre-recorded presentation.
-- Q&A (5 minutes). 
-
-### *Live Tutorial with Dataset (20-25 minutes) Tutorial Breakdown:*
-
-1. Setting up (1 minutes) Installing the required packages.
-   
-2. Basic Plotly Visualization (6 minutes) Demonstrate some basic plots – show the difference with static plots (e.g. ggplot2)
-
-3. Introducing Interactivity (6 minutes)
-   Enhance the previous visualization to be interactive (e.g., hover effects, zooming, filtering)
-
-4. Intro to Dash & Creating a Simple Dashboard (8 minutes)
-   Brief overview of how Dash works in R.
-   Create a basic dashboard showcasing the visualization and some controls (like a dropdown for selecting the year).
+- **Introduction to Data Visualization**
+  - Importance of data visualization
+  - The role of interactivity in enhancing data comprehension
   
-6. Conclusion (2 minutes) Emphasize the importance of interactive visualizations. Encourage students to explore more features on their own.
+- **Plotly**
+  An introduction to the R library, its benefits, and a quick visualization example. 
+  - What is Plotly?
+  - Key Features
+  - Advantages of using Plotly
+  - Best Practices
+  - Example(s)
 
+- **Dash**
+  A primer on this web application framework, its integration with Plotly, and a quick dashboard demo.
+  - What is Dash? Why integrate with Plotly?
+  - Key features
+  - Advantages of using Dash
+  - Best Practices
+  - Example(s)
+  
+- **Live Tutorial** (25 minutes): A hands-on session covering:
+  - Setting up the environment
+  - Basic Plotly visualization
+  - Introducing interactivity
+  - An intro to Dash & creating a dashboard
 
-### GitHub Repository Structure:	
-### README.md: Follow the provided template.
-	Introduction
-	Session contents
-	Dataset information
-	Contributors
-	
-### Code:
-	basic_plotly.R: Basic visualization using Plotly.
-	interactive_plotly.R: Adding interactivity.
-	dash_dashboard.R: Creating a dashboard using Dash.
-	Data: If you use a dataset not from a package, include it here.
-	Resources:
-	Links to official documentation, tutorials, and other useful resources on Plotly and Dash.
+<br>
 
+## 📊 Dataset Information
 
-### Dataset ideas:
-Beer Consumption by US State: Package: beers in dataedu Description: This dataset provides details about beer consumption in US states, including craft beer production, overall beer consumption, and brewery count. Usage: Useful for sociological studies on drinking culture, regional preferences, or the rise of craft beer as a cultural phenomenon.  https://github.com/plotly/datasets/blob/master/beers.csv 
+### Beer Consumption by US State
+**Description**: This dataset offers a detailed insight into beer consumption trends across US states, covering aspects like craft beer production, overall beer consumption, and brewery count.  
+**Usage**: Explorations into drinking culture, regional preferences, or the rise of craft beer as a cultural movement.  
+**Link**: [Beer Consumption Data](https://github.com/plotly/datasets/blob/master/beers.csv)
+
+<br>
+
+## 📂 Repository Structure
+- **README.md**: This document, providing an overview of the workshop.
+- **Code**
+  (still to be populated)
+  - `basic_plotly.R`: Demonstrations using Plotly for basic visualizations.
+  - `interactive_plotly.R`: Steps to enhance the visualizations with interactivity.
+  - `dash_dashboard.R`: Steps to craft an interactive dashboard using Dash.
+  - `interactive_tutorial.Rmd`: Rmd script for the tutorial.
+  - **Data**: If datasets outside of the mentioned packages are used, you'll find them here.
+    (still to be populated)
+- **Resources**
+  - Includes links to documentation, tutorials, and other insightful materials related to Plotly and Dash.
+    (still to be populated)
+
+<br>
+
+## 📚 Resources
+For those eager to delve deeper into Plotly and Dash, here's a short list of resources:
+
+- [Plotly Official Documentation](https://plotly.com/r/) 
+
+- [Dash Official Documentation](https://dashr.plotly.com/)
+
+- [Useful Youtube video](https://www.youtube.com/watch?v=WmofiOklux8)
+
+<br>
+
