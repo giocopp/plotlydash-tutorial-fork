@@ -8,12 +8,12 @@ Welcome to the GitHub repository for the IDS Workshop  "Interactive Graphs with 
 <br>
 
 ## 📑 Table of Contents
-- [Introduction](#Introduction)
+- [Introduction](#introduction)
 - [Session Contents](#session-contents)
 - [Dataset Information](#dataset-information)
 - [Repository Structure](#repository-structure)
-- [Contributors](#Contributors)
-- [Resources](#Resources)
+- [Contributors](#contributors)
+- [Resources](#resources)
 
 <br>
 
