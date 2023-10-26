@@ -244,22 +244,113 @@ Plotly and Dash in R</h3>
 communicate insights effectively, revealing the hidden patterns and
 trends that wouldn’t be obvious in tabular data, turning raw data into
 information.</p>
-<div id="why-interactive-graphics" class="section level3">
-<h3>Why interactive graphics? 📊</h3>
+<p>The tools we are going to introduce today serve exactly this purpose,
+enhancing the visualization possibilities offered by other static
+visualization packages such as <code>ggplot2</code>.</p>
+<p><strong>What tools allow to do so?</strong></p>
+<p>Plotly and Dash! And we will introduce both!</p>
+<p>Indeed, <code>plotly</code> and <code>dash</code> are 💫 interactive
+💫, in the sense that the user can interact with the data through the
+graph directly. This allows possibilities for higher understanding of
+the data.</p>
+<div id="why-interactive-graphs" class="section level3">
+<h3>Why interactive graphs? 📊</h3>
 <ul>
-<li>Engagement: Makes data come alive (interactive) and is more engaging
-for users. This increase understanding and retention.</li>
-<li>Depth: Allows users to drill down and explore nuances, as
-interaction allows to create narratives more easily. Users can ask ‘why’
-and get answers instantly by exploring the chart or graph.</li>
-<li>Decision-making: Facilitates more informed decisions.</li>
+<li><p><em>Engagement</em>: Makes data come alive (interactive) and is
+more engaging for users. This increase understanding and
+retention.</p></li>
+<li><p><em>Depth</em>: Allows users to drill down and explore nuances,
+as interaction allows to create narratives more easily. Users can ask
+‘why’ and get answers instantly by exploring the chart or
+graph.</p></li>
+<li><p><em>Decision-making</em>: Facilitates more informed
+decisions.</p></li>
 </ul>
-<p><strong>What tools allow to do so?</strong>… Plotly and Dash! And we
-will introduce both!</p>
+<p>Both <code>plotly</code> and <code>dash</code> are interactive, but
+we can say that the level of interaction is different:
+<code>plotly</code> appears very similar to a static plot, with the
+difference that we can hover your cursor over it, accessing further
+data. <code>dash</code> on the other hand, creates proper dashboards,
+namely HTML apps, allowing even more interaction.</p>
 </div>
 </div>
 <div id="plotly" class="section level1">
-<h1>Plotly 🏄</h1>
+<h1>Plotly</h1>
+<div id="what-is-plotly" class="section level3">
+<h3>What is Plotly?</h3>
+<p>Plotly is actually a company headquartered in Montreal, Canada,
+providing online graphing, analytics, and statistics tools, as well as
+scientific graphing libraries for Python, R, MATLAB, Perl, Julia,
+Arduino, JavaScript and REST.</p>
+<p>In this contex, with Plotly we refer to the R package for to create
+interactive graphs.</p>
+</div>
+<div id="advantages-of-using-plotly" class="section level3">
+<h3>Advantages of using Plotly</h3>
+<ul>
+<li><p>Seamless integration with R and <code>ggplot2</code>, through the
+<code>ggplotly()</code> function, that converts your static plots to an
+interactive web-based version!</p></li>
+<li><p>Diverse range of plots and customization (wide array of chart
+types with extensive customization options), as well as the possibility
+to zoom in and out into the plot, or select a certain part of the plot
+and explore it specifically.</p></li>
+<li><p>HTML web integration of graphs, makes visualization more
+accessible and intuitive.</p></li>
+</ul>
+</div>
+<div id="some-visualization-examples." class="section level3">
+<h3>Some visualization examples.</h3>
+<p>A cool, non-trivial, yet not too complex, visualization that
+encapsulate the power of Plotly: <br> Let’s track the rise of craft beer
+production across the US over time with the <a
+href="https://github.com/plotly/datasets/blob/master/beers.csv">Beer
+Consumption by US State Data</a> 🍺, for example ???</p>
+</div>
+</div>
+<div id="dash" class="section level1">
+<h1>Dash</h1>
+<div id="what-is-dash" class="section level3">
+<h3>What is Dash?</h3>
+<p>A web application framework for R (and Python and other programming
+languages) that allows creating interactive, web-based data dashboards
+(indeed), turning your interactive plots into full-blown web
+applications.</p>
+</div>
+<div id="key-features" class="section level3">
+<h3>Key features</h3>
+<ul>
+<li><p><strong>HTML layout</strong>: Design your dashboard layout using
+simple HTML components, without having to write any actual HTML. Indeed,
+it structure dashboard components using a set of pre-defined HTML tags
+within R.</p></li>
+<li><p>Interactivity through <strong>callbacks</strong>: callbacks
+define interactive behavior by specifying how input changes should
+modify output components. Essentially, when changing a dropdown or move
+a slider, a callback updates a chart, text, or any other component in
+real-time.</p></li>
+<li><p><strong>Integration with Plotly</strong> visualizations: Plotly
+charts can be easily included in Dash, making them part of an<br />
+interactive dashboard where each component can talk to others.</p></li>
+</ul>
+</div>
+<div id="some-visualization-examples.-1" class="section level3">
+<h3>Some visualization examples.</h3>
+<p>A cool, non-trivial, yet not too complex, visualization that
+encapsulate the power of Dash: <br> Let’s create a dash with a map of
+the public toilet in Berlin using the <a
+href="https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/">Berlin
+Public Toilet Data</a> 🚽, for example ???</p>
+</div>
+</div>
+<div id="thank-you" class="section level1">
+<h1>Thank you!</h1>
+<p>Now… interactive tutorial!</p>
+<p>You find the .Rmd file in the repository.</p>
+<p>Download it and open it in your R Studio, so that you can follow us
+directly and complete the exercises we prepared for you directly
+there!</p>
+<p><br></p>
 </div>
 
 
