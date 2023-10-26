@@ -58,12 +58,14 @@ In a data-intensive world, understanding and communicating complex data effectiv
 ## 📊 Dataset Information
 
 ### Beer Consumption by US State
-**Description**: This dataset offers a detailed insight into beer consumption trends across US states, covering aspects like craft beer production, overall beer consumption, and brewery count.  
+**Description**: This dataset offers a detailed insight into beer consumption trends across US states, covering aspects like craft beer production, overall beer consumption, and brewery count. 
+
 **Link**: [Beer Consumption Data](https://github.com/plotly/datasets/blob/master/beers.csv)
 
 
 ### Berlin Public Toilet
 **Description**: This dataset offers data of all public restrooms in Berlin, with a bunch of variables such as location, price, wheelchair accessibility.
+
 **Link**: [Berlin Public Toilet Data](https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/)
 
 
