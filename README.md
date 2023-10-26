@@ -7,13 +7,16 @@ Welcome to the GitHub repository for the IDS Workshop  "Interactive Graphs with 
 
 <br>
 
-## 📑 Table of Contents
-- [Introduction](#introduction)
-- [Session Contents](#session-contents)
-- [Dataset Information](#dataset-information)
-- [Repository Structure](#repository-structure)
-- [Contributors](#contributors)
-- [Resources](#resources)
+## 📑 Contents
+- [Presentation Slides]()
+- [Live Tutorial Rmd]()
+- [Data]()
+- [Graphs Scripts]()
+  - `basic_plotly.R`: Demonstrations using Plotly for basic visualizations.
+  - `interactive_plotly.R`: Steps to enhance the visualizations with interactivity.
+  - `dash_dashboard.R`: Steps to craft an interactive dashboard using Dash.
+  - `interactive_tutorial.Rmd`: Rmd script for the tutorial.
+  - `slides_workshop.Rmd`: Slides for the workshop presentation.
 
 <br>
 
@@ -56,25 +59,13 @@ In a data-intensive world, understanding and communicating complex data effectiv
 
 ### Beer Consumption by US State
 **Description**: This dataset offers a detailed insight into beer consumption trends across US states, covering aspects like craft beer production, overall beer consumption, and brewery count.  
-**Usage**: Explorations into drinking culture, regional preferences, or the rise of craft beer as a cultural movement.  
 **Link**: [Beer Consumption Data](https://github.com/plotly/datasets/blob/master/beers.csv)
 
-<br>
 
-## 📂 Repository Structure
-- **README.md**: This document, providing an overview of the workshop.
-- **Code**
-  (still to be populated)
-  - `basic_plotly.R`: Demonstrations using Plotly for basic visualizations.
-  - `interactive_plotly.R`: Steps to enhance the visualizations with interactivity.
-  - `dash_dashboard.R`: Steps to craft an interactive dashboard using Dash.
-  - `interactive_tutorial.Rmd`: Rmd script for the tutorial.
-  - `slides_workshop.Rmd`: Slides for the workshop presentation.
-  - **Data**: 
-    (still to be populated)
-- **Resources**
-  - Includes links to documentation, tutorials, and other insightful materials related to Plotly and Dash.
-    (still to be populated)
+### Berlin Public Toilet
+**Description**: This dataset offers data of all public restrooms in Berlin, with a bunch of variables such as location, price, wheelchair accessibility.
+**Link**: [Berlin Public Toilet Data](https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/)
+
 
 <br>
 
