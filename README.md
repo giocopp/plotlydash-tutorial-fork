@@ -3,7 +3,9 @@
 
 <br>
 
-Welcome to the GitHub repository for the IDS Workshop  "Interactive Graphs with Plotly and Dash". Dive into the fascinating world of interactive data visualization with this structured workshop, designed to introduce you to the powerful capabilities of Plotly and Dash in R.
+Welcome to the GitHub repository for the "Interactive Graphs with Plotly and Dash" session, part of the I2DS Tools for Data Science workshop run at the Hertie School, Berlin in October 2023. The student-run workshop is part of the course Introduction to Data Science taught by Simon Munzert at the Hertie School, Berlin, in Fall 2023.
+
+We will dive into the fascinating world of interactive data visualization with this structured workshop, designed to introduce you to the powerful capabilities of Plotly and Dash in R.
 
 <br>
 
