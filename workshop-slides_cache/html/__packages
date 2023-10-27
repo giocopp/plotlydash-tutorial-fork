@@ -11,3 +11,7 @@ forcats
 lubridate
 hrbrthemes
 fontawesome
+plotly
+dash
+viridisLite
+viridis

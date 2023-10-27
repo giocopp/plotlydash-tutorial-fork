@@ -14,6 +14,39 @@ output:
       ratio: '16:9'
       hash: true
 ---
+
+```{r, include=F}
+pacman::p_load(tidyverse, readr, knitr, ggplot2, plotly, dash, stringr, viridis)
+
+# adding datasets
+beers_original <- read_csv('./data/beers.csv')
+toilets <- read_csv('./data/berliner-toiletten-standorte.csv')
+
+# manuipulation
+beers <- beers_original |>
+  mutate(style_group = case_when(
+    (str_detect(style, "IPA") ~ "IPA"),
+    (str_detect(style, "Ale") ~ "Ale"),
+    (str_detect(style, "Lager") | style == "Altbier" ~ "Lager"),
+    (str_detect(style, "Pilsner") | str_detect(style, "Pilsener") ~ "Pilsner"),
+    (str_detect(style, "Stout") ~ "Stout"),
+    (str_detect(style, "Barleywine") ~ "Barleywine"),
+    (str_detect(style, "Porter") ~ "Porter"),
+    (str_detect(style, "Radler") | str_detect(style, "Fruit") ~ "Radler/Fruit"),
+    .default = "Other"
+    )
+  )
+
+beers_clean <- beers_original %>%
+    group_by(state) %>% 
+    summarize(
+      total_beers = n(),
+      ale_count = sum(str_detect(style, "Ale") | str_detect(style, "IPA")),
+      ale_percentage = (ale_count / total_beers) * 100
+    )
+```
+
+
 class: inverse, center, middle
 name: welcome
 
@@ -108,29 +141,40 @@ Plotly is actually a company headquartered in Montreal, Canada, providing online
 --
 - HTML web integration of graphs, makes visualization more accessible and intuitive. 
 
----
-# Plotly
-### Best Practices: Improving Performances
-
-
-
-More advanced performance improvements [here](https://plotly-r.com/performance).
 
 ---
 # Plotly
 ### Some visualization examples.
 
-A cool, non-trivial, yet not too complex, visualization that encapsulate the power of Plotly:
+Some cool, non-trivial, yet not too complex, visualization that encapsulate the power of Plotly:
 <br>
-Let's track the rise of craft beer production across the US over time with the [Beer Consumption by US State Data](https://github.com/plotly/datasets/blob/master/beers.csv) `r emo::ji("beer")`, for example ???
+Let's play around a bit with the [Beer Consumption by US State Data](https://github.com/plotly/datasets/blob/master/beers.csv) `r emo::ji("beer")`!
+
+We will create:
+* blabla
+* blabla
+* blabla
+* etc
 
 ---
-# Plotly
-### Example 1: Plotly Bar Plots
+# Plotly more in-deep
+### Example: Histogram
 
-A cool, non-trivial, yet not too complex, visualization that encapsulate the power of Plotly:
-<br>
-Let's track the rise of craft beer production across the US over time with the [Beer Consumption by US State Data](https://github.com/plotly/datasets/blob/master/beers.csv) `r emo::ji("beer")`, for example ???
+```{r}
+fig1a <- beers |>
+  plot_ly(x = ~abv, type = "histogram")
+fig1a
+```
+Ref: [Plotly Histograms](https://plotly.com/r/histograms/)
+---
+# Plotly more in-deep
+### Example 2: ...
+
+
+---
+# Plotly more in-deep
+### ggplotly(): Transforming a ggplot graph into an interactive plotly graph!
+
 
 ---
 # Dash
