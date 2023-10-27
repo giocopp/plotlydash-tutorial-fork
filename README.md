@@ -28,26 +28,26 @@ In a data-intensive world, understanding and communicating complex data effectiv
   - The role of interactivity in enhancing data comprehension
   
 - **Plotly**
-  An introduction to the R library, its benefits, and a quick visualization example. 
+  An introduction to the R library, its benefits, and some visualization examples . 
   - What is Plotly?
   - Key Features
   - Advantages of using Plotly
   - Best Practices
-  - Example(s)
+  - Examples and code breakdown
 
 - **Dash**
-  A primer on this web application framework, its integration with Plotly, and a quick dashboard demo.
+  A primer on this web application framework, its integration with Plotly, and some dashboard demo examples.
   - What is Dash? Why integrate with Plotly?
   - Key features
   - Advantages of using Dash
   - Best Practices
-  - Example(s)
+  - Examples and code breakdown
   
 - **Live Tutorial**: A hands-on session covering:
   - Setting up the environment
-  - Basic Plotly visualization
-  - Introducing interactivity
-  - An intro to Dash & creating a dashboard
+  - Basic Plotly visualization: introducing interactivity
+  - From ggplot2 to Plotly
+  - An intro to Dash and dashboards
 
 <br>
 
@@ -60,7 +60,7 @@ In a data-intensive world, understanding and communicating complex data effectiv
 
 
 ### Berlin Public Toilet
-**Description**: This dataset offers data of all public restrooms in Berlin, with a bunch of variables such as location, price, wheelchair accessibility.
+**Description**: This dataset offers data of all public restrooms in Berlin, with a bunch of variables such as location, price, wheelchair accessibility and changing table availability.
 
 **Link**: [Berlin Public Toilet Data](https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/)
 
@@ -70,11 +70,11 @@ In a data-intensive world, understanding and communicating complex data effectiv
 ## 📚 Resources
 For those eager to delve deeper into Plotly and Dash, here's a short list of resources:
 
-- [Plotly Official Documentation](https://plotly.com/r/) 
+- [Plotly Official R Open Source Graphing Library](https://plotly.com/r/) 
 
-- [Dash Official Documentation](https://dashr.plotly.com/)
+- [Dash Official Full Documentation](https://dashr.plotly.com/)
 
-- [Useful Youtube video](https://www.youtube.com/watch?v=WmofiOklux8)
+- [Useful additional Youtube tutorial](https://www.youtube.com/watch?v=WmofiOklux8) 
 
 <br>
 
