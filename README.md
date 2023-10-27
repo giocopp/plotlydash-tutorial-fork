@@ -76,7 +76,7 @@ For those eager to delve deeper into Plotly and Dash, here's a short list of res
 
 - [Useful additional Youtube tutorial](https://www.youtube.com/watch?v=WmofiOklux8) 
 
-- [Interactive web-based data visualization with R] (https://plotly-r.com/) - If you are really thunderstruck by interactive visualization, check out this book!
+- [Interactive web-based data visualization with R](https://plotly-r.com/) - If you are really thunderstruck by interactive visualization, check out this book!
 
 <br>
 
