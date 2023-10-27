@@ -112,9 +112,21 @@ Plotly is actually a company headquartered in Montreal, Canada, providing online
 # Plotly
 ### Best Practices: Improving Performances
 
+
+
+More advanced performance improvements [here](https://plotly-r.com/performance).
+
 ---
 # Plotly
 ### Some visualization examples.
+
+A cool, non-trivial, yet not too complex, visualization that encapsulate the power of Plotly:
+<br>
+Let's track the rise of craft beer production across the US over time with the [Beer Consumption by US State Data](https://github.com/plotly/datasets/blob/master/beers.csv) `r emo::ji("beer")`, for example ???
+
+---
+# Plotly
+### Example 1: Plotly Bar Plots
 
 A cool, non-trivial, yet not too complex, visualization that encapsulate the power of Plotly:
 <br>
