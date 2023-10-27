@@ -158,7 +158,10 @@ We will create:
 
 ---
 # Plotly more in-deep
-### Example: Histogram
+### Example 1: Histogram
+Let's create a plotly graph plotting the 'alcohol by volume' (abv) variable against the beer 'count', to see the distribution of beer production in terms of alcohol level.
+<br>
+
   .pull-left[
 <details>
   <summary>
@@ -166,7 +169,7 @@ We will create:
   </summary>
 .details[.code120[
 ```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.5, fig.height=0.2}
-fig1b <- beers |>
+fig1b <- beers %>% 
   plot_ly(x = ~abv, type = "histogram", name = "ABV") |>
   layout(
     title = "ABV Histogram",
@@ -185,17 +188,18 @@ fig1b <- beers |>
   Plot
   </summary>
 .details[.code120[
-```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=1.85, fig.height=1.15}
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=F, fig.width=1.85, fig.height=1.15}
 fig1b
 ```
 ]]
 </details>]
 
-
-Ref: [Plotly Histograms](https://plotly.com/r/histograms/)
 ---
 # Plotly more in-deep
-### Example 2: ...
+### Example 2: Histogram comparison
+Now, let's compare the histogram we created previously with another showing the distribution of beer production in terms of IBU level.
+<br>
+
   .pull-left[
 <details>
   <summary>
@@ -203,10 +207,16 @@ Ref: [Plotly Histograms](https://plotly.com/r/histograms/)
   </summary>
 .details[.code120[
 ```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.5, fig.height=0.2}
-fig1c <- beers |>
-  plot_ly(x = ~ibu, type = "histogram", name = "IBU")
+fig1c <- beers %>% 
+  plot_ly(x = ~ibu, type = "histogram", name = "IBU") %>% 
+          layout(
+    title = "IBU Histogram",
+    xaxis = list(title = "International Bitterness Units (IBU)"),
+    yaxis = list(title = "Count of beers"),
+    bargap=0.2
+  )
 
-fig1d <- subplot(fig1b, fig1c) |>
+fig1d <- subplot(fig1b, fig1c) %>% 
   layout(title = 'ABV and IBU histograms')
 ```
 
@@ -219,7 +229,7 @@ fig1d <- subplot(fig1b, fig1c) |>
   Plot
   </summary>
 .details[.code120[
-```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=1.85, fig.height=1.15}
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=F, fig.width=1.85, fig.height=1.15}
 fig1d
 ```
 ]]
@@ -227,7 +237,9 @@ fig1d
 
 ---
 # Plotly more in-deep
-### Example 3: ...
+### Example 3: Boxplot
+What about a boxplot 
+
   .pull-left[
 <details>
   <summary>
@@ -251,7 +263,7 @@ fig3a <- beers |>
   Plot
   </summary>
 .details[.code120[
-```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=F, fig.width=1.85, fig.height=1.15}
 fig3a
 ```
 ]]
@@ -259,7 +271,7 @@ fig3a
 
 ---
 # Plotly more in-deep
-### Example 4: 
+### Example 4: Scatterplot
 
 
  .pull-left[
@@ -278,7 +290,6 @@ fig4a <- beers |>
     yaxis = list(title = "International Bitterness Units (IBU)")
   )
 ```
-
 ]]
 </details>]
 
@@ -288,13 +299,12 @@ fig4a <- beers |>
   Plot
   </summary>
 .details[.code120[
-```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=F, fig.width=1.85, fig.height=1.15}
 fig4a
 ```
 ]]
 </details>]
 
-fig4a
 
 ---
 # Plotly more in-deep
