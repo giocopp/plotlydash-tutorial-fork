@@ -246,15 +246,15 @@ We have a ggplot histogram that we want to transform into a plotly with ggplotly
 .details[.code120[
 
 ```r
-R&gt;    ggplot1 &lt;- beers_clean_join %&gt;%
-+     arrange(desc(ale_percentage)) %&gt;%
-+     ggplot(aes(x = reorder(state, -ale_percentage), y = ale_percentage, 
-+                text = tooltip)) +  # Adding the tooltip here
-+     geom_bar(stat = "identity", fill = "goldenrod") +
+R&gt; ggplot_1 &lt;-  beers_clean %&gt;%
++     ggplot(aes(x = reorder(state, -ale_count))) +
++     geom_bar(aes(y = total_beers, fill = "Total Beers"), stat = "identity", position = "dodge") +
++     geom_bar(aes(y = ale_count, fill = "ALE Beers"), stat = "identity", position = "dodge") +
 +     coord_flip() +
-+     labs(title = "Percentage of ALE Beers by State",
++     labs(title = "Comparison of Total Beers and ALE Beers by State",
 +          x = "State",
-+          y = "Percentage of ALE Beers")
++          y = "Count") +
++     scale_fill_manual(values = c("Total Beers" = "gold", "ALE Beers" = "goldenrod"))
 ```
 ]]
 &lt;/details&gt;]
@@ -283,7 +283,7 @@ Here, when you hover over the graph, you will be able to see the top 3 more alch
 .details[.code120[
 
 ```r
-R&gt;   plotly_obj_1 &lt;- ggplotly(ggplot1, tooltip = "text")
+R&gt;   plotly_obj_1 &lt;- ggplotly(ggplot_1, tooltip = "text")
 ```
 ]]
 &lt;/details&gt;]
