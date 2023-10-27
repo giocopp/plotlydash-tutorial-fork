@@ -33,8 +33,8 @@ library(viridis)
          x = "State",
          y = "Percentage of ALE Beers")
   
-  plotly_obj <- ggplotly(plot_1)
-  plotly_obj
+  plotly_obj_1 <- ggplotly(plot_1)
+  plotly_obj_1
   
   # second plot:
   plot_2 <-  beers_clean %>%
@@ -48,7 +48,7 @@ library(viridis)
     scale_fill_manual(values = c("Total Beers" = "gold", "ALE Beers" = "goldenrod"))
   
   plotly_obj <- ggplotly(plot_2)
-  plotly_obj
+  plotly_obj_2
   
   # third plot:
  plot_3 <- beers_clean %>%
@@ -63,7 +63,7 @@ library(viridis)
     theme_minimal()
  
  plotly_obj <- ggplotly(plot_3)
- plotly_obj 
+ plotly_obj_3
 
   # fourth plot:
  plot_4 <- beers_clean %>%
@@ -79,5 +79,5 @@ library(viridis)
     theme_minimal()  
       
  plotly_obj <- ggplotly(plot_4)
- plotly_obj  
+ plotly_obj_4
   

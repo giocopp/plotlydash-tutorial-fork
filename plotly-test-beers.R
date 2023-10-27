@@ -36,12 +36,12 @@ beers <- beers |>
 #Ref: https://plotly.com/r/histograms/
 
 #1a. One-line "abv" histogram > interactive features
-fig1a <- beers |>
+fig_1a <- beers |>
   plot_ly(x = ~abv, type = "histogram")
-fig1a
+fig_1a
 
 #1b. Add layout
-fig1b <- beers |>
+fig_1b <- beers |>
   plot_ly(x = ~abv, type = "histogram", name = "ABV") |>
   layout(
     title = "ABV Histogram",
@@ -49,44 +49,44 @@ fig1b <- beers |>
     yaxis = list(title = "Count of beers"),
     bargap=0.2
   )
-fig1b
+fig_1b
 
 #1c. One-line "ibu" histogram
-fig1c <- beers |>
+fig_1c <- beers |>
   plot_ly(x = ~ibu, type = "histogram", name = "IBU")
-fig1c
+fig_1c
 
 #1d. Subplots
-fig1d <- subplot(fig1b, fig1c) |>
+fig_1d <- subplot(fig1b, fig1c) |>
   layout(title = 'ABV and IBU histograms')
-fig1d
+fig_1d
 
 #2. Bar charts
 #Ref: https://plotly.com/r/bar-charts/
 
 #2a. "style" bar-chart
-fig2a <- beers |> count(style_group) |>
+fig_2a <- beers |> count(style_group) |>
   plot_ly(x = ~style_group, y = ~n, type = "bar") |>
   layout(xaxis = list(categoryorder = "total descending"))
-fig2a
+fig_2a
 
 #3. Boxplots
 #Ref: https://plotly.com/r/box-plots/
 
 #3a. "abv" vs. "style" boxplot (x for horizontal, y for vertical)
-fig3a <- beers |>
+fig_3a <- beers |>
   plot_ly(x = ~abv, color = ~style_group, type = "box", showlegend = FALSE)
-fig3a
+fig_3a
 
-fig3b <- beers |>
+fig_3b <- beers |>
   plot_ly(x = ~ibu, color = ~style_group, type = "box", showlegend = FALSE)
-fig3b
+fig_3b
 
 #4 Scatter plots
 #Ref: https://plotly.com/r/line-and-scatter/
 
 #4a. "abv" vs. "ibu" by "style"
-fig4a <- beers |>
+fig_4a <- beers |>
   plot_ly(x = ~abv, y = ~ibu, color = ~style_group, type = "scatter", mode = "markers",
           text = ~paste('Beer: ', beer, '</br>Style: ', style, '</br>Style Group: ', style_group)) |>
   layout(
@@ -94,13 +94,13 @@ fig4a <- beers |>
     xaxis = list(title = "Alcohol by Volume (ABV)"),
     yaxis = list(title = "International Bitterness Units (IBU)")
   )
-fig4a
+fig_4a
 
 #5 3d scatter plot
 #Ref: https://plotly.com/r/3d-scatter-plots/
 
 #5a. "abv" vs. "ibu" vs. "ounces" 3d scatter
-fig5a <- beers |>
+fig_5a <- beers |>
   plot_ly(x = ~abv, y = ~ibu, z = ~ounces, color = ~style_group, type = "scatter3d", mode = "markers",
           text = ~paste('Beer: ', beer, '</br>Style: ', style, '</br>Style Group: ', style_group))
-fig5a
+fig_5a
