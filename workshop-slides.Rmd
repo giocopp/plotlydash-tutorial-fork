@@ -110,6 +110,10 @@ Plotly is actually a company headquartered in Montreal, Canada, providing online
 
 ---
 # Plotly
+### Best Practices: Improving Performances
+
+---
+# Plotly
 ### Some visualization examples.
 
 A cool, non-trivial, yet not too complex, visualization that encapsulate the power of Plotly:

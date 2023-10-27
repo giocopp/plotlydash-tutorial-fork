@@ -70,7 +70,9 @@ In a data-intensive world, understanding and communicating complex data effectiv
 ## 📚 Resources
 For those eager to delve deeper into Plotly and Dash, here's a short list of resources:
 
-- [Plotly Official R Open Source Graphing Library](https://plotly.com/r/) 
+- [Full Plotly Official R Graphing Library](https://plotly.com/r/) 
+
+- [ggplotly() function R Graphing Library](https://plotly.com/ggplot2/)
 
 - [Dash Official Full Documentation](https://dashr.plotly.com/)
 
