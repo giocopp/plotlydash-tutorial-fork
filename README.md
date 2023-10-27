@@ -10,7 +10,7 @@ We will dive into the fascinating world of interactive data visualization with t
 <br>
 
 ## 📑 Contents
-- [Presentation Slides]()
+- Presentation Slides [.html](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop-slides.html) [.Rmd](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop-slides.Rmd)
 - [Live Tutorial Rmd]()
 - [Data]()
 - [Graphs Scripts]()
