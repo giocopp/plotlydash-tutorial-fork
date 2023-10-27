@@ -23,8 +23,8 @@ library(viridis)
          x = "State",
          y = "Percentage of ALE Beers")
   
-  # first plot TRANSFORMED but to be adjusted in a meaningfull way:
-  p <- beers_clean %>%
+  # first plot TRANSFORMED but to be adjusted in a meaningful way:
+  plot_1 <- beers_clean %>%
     arrange(desc(ale_percentage)) %>%
     ggplot(aes(x = reorder(state, -ale_percentage), y = ale_percentage)) +
     geom_bar(stat = "identity", fill = "goldenrod") +
@@ -33,11 +33,11 @@ library(viridis)
          x = "State",
          y = "Percentage of ALE Beers")
   
-  plotly_obj <- ggplotly(p)
+  plotly_obj <- ggplotly(plot_1)
   plotly_obj
   
   # second plot:
-  l <-  beers_clean %>%
+  plot_2 <-  beers_clean %>%
     ggplot(aes(x = reorder(state, -ale_count))) +
     geom_bar(aes(y = total_beers, fill = "Total Beers"), stat = "identity", position = "dodge") +
     geom_bar(aes(y = ale_count, fill = "ALE Beers"), stat = "identity", position = "dodge") +
@@ -47,11 +47,11 @@ library(viridis)
          y = "Count") +
     scale_fill_manual(values = c("Total Beers" = "gold", "ALE Beers" = "goldenrod"))
   
-  plotly_obj <- ggplotly(l)
+  plotly_obj <- ggplotly(plot_2)
   plotly_obj
   
   # third plot:
-  beers_clean %>%
+ plot_3 <- beers_clean %>%
     ggplot(aes(x = total_beers, y = ale_count, label = state)) +
     geom_point(aes(color = ale_percentage), size = 3) +
     geom_text(check_overlap = TRUE, vjust = 1.5, hjust = 1.5) +
@@ -61,9 +61,12 @@ library(viridis)
          y = "ALE Beers",
          color = "ALE %") +
     theme_minimal()
+ 
+ plotly_obj <- ggplotly(plot_3)
+ plotly_obj 
 
   # fourth plot:
-  beers_clean %>%
+ plot_4 <- beers_clean %>%
     ggplot(aes(x = total_beers, y = ale_count, label = state)) +
     geom_point(aes(color = ale_percentage, size = ale_percentage), alpha = 0.6) +  # Set size and transparency
     geom_text(check_overlap = TRUE, vjust = 1.5, hjust = 1.5) +
@@ -75,5 +78,6 @@ library(viridis)
          color = "ALE %") +
     theme_minimal()  
       
-  
+ plotly_obj <- ggplotly(plot_4)
+ plotly_obj  
   
