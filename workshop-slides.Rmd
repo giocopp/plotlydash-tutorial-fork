@@ -268,7 +268,7 @@ We have a ggplot histogram that we want to transform into a plotly with ggplotly
   Code
   </summary>
 .details[.code120[
-```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.5, fig.height=0.2}
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.2, fig.height=0.2}
 beers_clean <- beers_original %>%
     group_by(state) %>%
     summarize(
@@ -314,7 +314,12 @@ Here, when you hover over the graph, you will be able to see the top 3 more alch
   Code
   </summary>
 .details[.code120[
-```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE,  fig.width=0.5, fig.height=0.2}
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE,  fig.width=0.2, fig.height=0.2}
+top_beers_by_state <- beers %>%
+    group_by(state) %>%
+    top_n(3, abv) %>%
+    summarize(tooltip = paste(beer, "(", style, ")", collapse = "\n"))
+
 top_ale_beers_by_state <- beers %>%
     filter(str_detect(style, "Ale") | str_detect(style, "IPA")) %>%
     group_by(state) %>%
