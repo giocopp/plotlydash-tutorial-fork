@@ -44,6 +44,14 @@ beers_clean <- beers_original %>%
       ale_count = sum(str_detect(style, "Ale") | str_detect(style, "IPA")),
       ale_percentage = (ale_count / total_beers) * 100
     )
+  
+top_beers_by_state <- beers %>%
+    group_by(state) %>%
+    top_n(3, abv) %>%
+    summarize(tooltip = paste(beer, "(", style, ")", collapse = "\n"))
+  
+beers_clean_join <- beers_clean %>%
+    left_join(top_beers_by_state, by = "state")
 ```
 
 
@@ -238,7 +246,7 @@ fig1d
 ---
 # Plotly more in-deep
 ### Example 3: Boxplot
-What about a boxplot 
+What about a boxplot showing alcool level against type of beer?
 
   .pull-left[
 <details>
@@ -268,11 +276,13 @@ fig3a
 ```
 ]]
 </details>]
+--
+Interesting isn't it?
 
 ---
 # Plotly more in-deep
-### Example 4: Scatterplot
-
+### Example 4: Scatter plot
+And what about alchool level against bitterness? We need a scatter plot!
 
  .pull-left[
 <details>
@@ -309,7 +319,44 @@ fig4a
 ---
 # Plotly more in-deep
 ### ggplotly(): Transforming a ggplot graph into an interactive plotly graph!
+We have a ggplot histogram that we want to transform into a plotly with ggplotly():
 
+.pull-left[
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.5, fig.height=0.2}
+  ggplot1 <- beers_clean_join %>%
+    arrange(desc(ale_percentage)) %>%
+    ggplot(aes(x = reorder(state, -ale_percentage), y = ale_percentage, 
+               text = tooltip)) +  # Adding the tooltip here
+    geom_bar(stat = "identity", fill = "goldenrod") +
+    coord_flip() +
+    labs(title = "Percentage of ALE Beers by State",
+         x = "State",
+         y = "Percentage of ALE Beers")
+```
+]]
+</details>]
+
+ .pull-right[
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=F, fig.width=1.85, fig.height=1.15}
+ggplot1
+```
+]]
+</details>]
+
+---
+# Plotly more in-deep
+### ggplotly(): Transforming a ggplot graph into an interactive plotly graph!
+Let's see:
 
 ---
 # Dash

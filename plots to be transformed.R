@@ -13,10 +13,19 @@ library(viridis)
       ale_percentage = (ale_count / total_beers) * 100
     )
   
+  top_beers_by_state <- beers %>%
+    group_by(state) %>%
+    top_n(3, abv) %>%
+    summarize(tooltip = paste(beer, "(", style, ")", collapse = "\n"))
+  
+  beers_clean_join <- beers_clean %>%
+    left_join(top_beers_by_state, by = "state")
+  
   # first plot:
-  beers_clean %>%
+  ggplot1 <- beers_clean_join %>%
     arrange(desc(ale_percentage)) %>%
-    ggplot(aes(x = reorder(state, -ale_percentage), y = ale_percentage)) +
+    ggplot(aes(x = reorder(state, -ale_percentage), y = ale_percentage, 
+               text = tooltip)) +  # Adding the tooltip here
     geom_bar(stat = "identity", fill = "goldenrod") +
     coord_flip() +
     labs(title = "Percentage of ALE Beers by State",
@@ -24,16 +33,7 @@ library(viridis)
          y = "Percentage of ALE Beers")
   
   # first plot TRANSFORMED but to be adjusted in a meaningful way:
-  plot_1 <- beers_clean %>%
-    arrange(desc(ale_percentage)) %>%
-    ggplot(aes(x = reorder(state, -ale_percentage), y = ale_percentage)) +
-    geom_bar(stat = "identity", fill = "goldenrod") +
-    coord_flip() +
-    labs(title = "Percentage of ALE Beers by State",
-         x = "State",
-         y = "Percentage of ALE Beers")
-  
-  plotly_obj_1 <- ggplotly(plot_1)
+  plotly_obj_1 <- ggplotly(ggplot1, tooltip = "text")
   plotly_obj_1
   
   # second plot:
