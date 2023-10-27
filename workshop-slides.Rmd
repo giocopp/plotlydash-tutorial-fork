@@ -159,8 +159,13 @@ We will create:
 ---
 # Plotly more in-deep
 ### Example: Histogram
-
-```{r}
+  .pull-left[
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.5, fig.height=0.2}
 fig1b <- beers |>
   plot_ly(x = ~abv, type = "histogram", name = "ABV") |>
   layout(
@@ -169,17 +174,127 @@ fig1b <- beers |>
     yaxis = list(title = "Count of beers"),
     bargap=0.2
   )
-fig1b
-
-fig1d <- subplot(fig1b, fig1c) |>
-  layout(title = 'ABV and IBU histograms')
-fig1d
 ```
+
+]]
+</details>]
+
+  .pull-right[
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=1.85, fig.height=1.15}
+fig1b
+```
+]]
+</details>]
+
+
 Ref: [Plotly Histograms](https://plotly.com/r/histograms/)
 ---
 # Plotly more in-deep
 ### Example 2: ...
+  .pull-left[
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.5, fig.height=0.2}
+fig1c <- beers |>
+  plot_ly(x = ~ibu, type = "histogram", name = "IBU")
 
+fig1d <- subplot(fig1b, fig1c) |>
+  layout(title = 'ABV and IBU histograms')
+```
+
+]]
+</details>]
+
+  .pull-right[
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=1.85, fig.height=1.15}
+fig1d
+```
+]]
+</details>]
+
+---
+# Plotly more in-deep
+### Example 3: ...
+  .pull-left[
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.5, fig.height=0.2}
+fig3a <- beers |>
+  plot_ly(x = ~abv, 
+          color = ~style_group, 
+          type = "box", 
+          showlegend = FALSE)
+```
+
+]]
+</details>]
+
+  .pull-right[
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
+fig3a
+```
+]]
+</details>]
+
+---
+# Plotly more in-deep
+### Example 4: 
+
+
+ .pull-left[
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.5, fig.height=0.2}
+fig4a <- beers |>
+  plot_ly(x = ~abv, y = ~ibu, color = ~style_group, type = "scatter", mode = "markers",
+          text = ~paste('Beer: ', beer, '</br>Style: ', style, '</br>Style Group: ', style_group)) |>
+  layout(
+    title = "Beers scatter plot: ABV vs. IBU",
+    xaxis = list(title = "Alcohol by Volume (ABV)"),
+    yaxis = list(title = "International Bitterness Units (IBU)")
+  )
+```
+
+]]
+</details>]
+
+  .pull-right[
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
+fig4a
+```
+]]
+</details>]
+
+fig4a
 
 ---
 # Plotly more in-deep
