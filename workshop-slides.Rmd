@@ -161,9 +161,19 @@ We will create:
 ### Example: Histogram
 
 ```{r}
-fig1a <- beers |>
-  plot_ly(x = ~abv, type = "histogram")
-fig1a
+fig1b <- beers |>
+  plot_ly(x = ~abv, type = "histogram", name = "ABV") |>
+  layout(
+    title = "ABV Histogram",
+    xaxis = list(title = "Alcohol by Volume (ABV)"),
+    yaxis = list(title = "Count of beers"),
+    bargap=0.2
+  )
+fig1b
+
+fig1d <- subplot(fig1b, fig1c) |>
+  layout(title = 'ABV and IBU histograms')
+fig1d
 ```
 Ref: [Plotly Histograms](https://plotly.com/r/histograms/)
 ---
