@@ -62,7 +62,7 @@ library(viridis)
          color = "ALE %") +
     theme_minimal()
  
- plotly_obj <- ggplotly(plot_3)
+ plotly_obj_3 <- ggplotly(plot_3)
  plotly_obj_3
 
   # fourth plot:
@@ -78,6 +78,6 @@ library(viridis)
          color = "ALE %") +
     theme_minimal()  
       
- plotly_obj <- ggplotly(plot_4)
+ plotly_obj_4 <- ggplotly(plot_4)
  plotly_obj_4
   

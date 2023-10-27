@@ -204,48 +204,7 @@ fig1b
 
 ---
 # Plotly more in-deep
-### Example 2: Histogram comparison
-Now, let's compare the histogram we created previously with another showing the distribution of beer production in terms of IBU level.
-<br>
-
-  .pull-left[
-<details>
-  <summary>
-  Code
-  </summary>
-.details[.code120[
-```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.5, fig.height=0.2}
-fig1c <- beers %>% 
-  plot_ly(x = ~ibu, type = "histogram", name = "IBU") %>% 
-          layout(
-    title = "IBU Histogram",
-    xaxis = list(title = "International Bitterness Units (IBU)"),
-    yaxis = list(title = "Count of beers"),
-    bargap=0.2
-  )
-
-fig1d <- subplot(fig1b, fig1c) %>% 
-  layout(title = 'ABV and IBU histograms')
-```
-
-]]
-</details>]
-
-  .pull-right[
-<details>
-  <summary>
-  Plot
-  </summary>
-.details[.code120[
-```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=F, fig.width=1.85, fig.height=1.15}
-fig1d
-```
-]]
-</details>]
-
----
-# Plotly more in-deep
-### Example 3: Boxplot
+### Example 2: Boxplot
 What about a boxplot showing alcool level against type of beer?
 
   .pull-left[
@@ -261,7 +220,6 @@ fig3a <- beers |>
           type = "box", 
           showlegend = FALSE)
 ```
-
 ]]
 </details>]
 
@@ -271,17 +229,16 @@ fig3a <- beers |>
   Plot
   </summary>
 .details[.code120[
-```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=F, fig.width=1.85, fig.height=1.15}
+```{r, eval=T, message=FALSE, warning=FALSE, echo=F, fig.width=1.85, fig.height=1.15}
 fig3a
 ```
 ]]
-</details>]
---
-Interesting isn't it?
+</details>
+]
 
 ---
 # Plotly more in-deep
-### Example 4: Scatter plot
+### Example 3: Scatter plot
 And what about alchool level against bitterness? We need a scatter plot!
 
  .pull-left[
@@ -315,7 +272,6 @@ fig4a
 ]]
 </details>]
 
-
 ---
 # Plotly more in-deep
 ### ggplotly(): Transforming a ggplot graph into an interactive plotly graph!
@@ -328,15 +284,15 @@ We have a ggplot histogram that we want to transform into a plotly with ggplotly
   </summary>
 .details[.code120[
 ```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=0.5, fig.height=0.2}
-  ggplot1 <- beers_clean_join %>%
-    arrange(desc(ale_percentage)) %>%
-    ggplot(aes(x = reorder(state, -ale_percentage), y = ale_percentage, 
-               text = tooltip)) +  # Adding the tooltip here
-    geom_bar(stat = "identity", fill = "goldenrod") +
+ggplot_1 <-  beers_clean %>%
+    ggplot(aes(x = reorder(state, -ale_count))) +
+    geom_bar(aes(y = total_beers, fill = "Total Beers"), stat = "identity", position = "dodge") +
+    geom_bar(aes(y = ale_count, fill = "ALE Beers"), stat = "identity", position = "dodge") +
     coord_flip() +
-    labs(title = "Percentage of ALE Beers by State",
+    labs(title = "Comparison of Total Beers and ALE Beers by State",
          x = "State",
-         y = "Percentage of ALE Beers")
+         y = "Count") +
+    scale_fill_manual(values = c("Total Beers" = "gold", "ALE Beers" = "goldenrod"))
 ```
 ]]
 </details>]
@@ -347,8 +303,8 @@ We have a ggplot histogram that we want to transform into a plotly with ggplotly
   Plot
   </summary>
 .details[.code120[
-```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=F, fig.width=1.85, fig.height=1.15}
-ggplot1
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=F}
+ggplot_1
 ```
 ]]
 </details>]
@@ -357,7 +313,31 @@ ggplot1
 # Plotly more in-deep
 ### ggplotly(): Transforming a ggplot graph into an interactive plotly graph!
 Let's see:
+Here, when you hover over the graph, you will be able to see the top 3 more alchoolic ALE style produced in every US state.
 
+.pull-left[
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE,  fig.width=0.5, fig.height=0.2}
+  plotly_obj_1 <- ggplotly(ggplot_1, tooltip = "text")
+```
+]]
+</details>]
+
+ .pull-right[
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=F}
+plotly_obj_1
+```
+]]
+</details>]
 ---
 # Dash
 ### What is Dash?
