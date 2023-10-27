@@ -10,9 +10,9 @@ We will dive into the fascinating world of interactive data visualization with t
 <br>
 
 ## 📑 Contents
-- Presentation Slides [[.html]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop-slides.html) [[.Rmd]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop-slides.Rmd)
-- Live Tutorial [[.html]]() [[.Rmd]]()
-- Data [[Beer Consumption]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/data/beers.csv) [[Berlin Public Toilet]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/data/berliner-toiletten-standorte.csv)
+- **Presentation Slides** [[.html]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop-slides.html) [[.Rmd]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop-slides.Rmd)
+- **Live Tutorial** [[.html]]() [[.Rmd]]()
+- **Data** [[Beer Consumption]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/data/beers.csv) [[Berlin Public Toilet]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/data/berliner-toiletten-standorte.csv)
 
 <br>
 
