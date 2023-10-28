@@ -287,7 +287,7 @@ class: custom-slide
 
 <style>
 .custom-slide .remark-code, .custom-slide .remark-inline-code {
-    font-size: 12px;
+    font-size: 14px;
 }
 </style>
 
@@ -326,7 +326,7 @@ class: custom-slide
 
 <style>
 .custom-slide .remark-code, .custom-slide .remark-inline-code {
-    font-size: 12px;
+    font-size: 14px;
 }
 </style>
 
@@ -342,7 +342,7 @@ The default behavior (without specifications) is to display the mapped aesthetic
 --
 So, how to customize?
 -- 
-Using the *text* aesthetic in ggplot2 and then further control it using the *tootlip* argument in the ggplotly function!
+Only by combining the *text* aesthetic in ggplot2 with the *tootlip*  argument (and [other customization options](https://plotly.com/ggplot2/)) in ggplotly, you can achieve a wide range of tooltip customizations in your interactive plots!
 
 ```{r}
 p <- ggplot(mtcars, aes(x = mpg, y = wt, text = paste("Car:", rownames(mtcars)))) +
@@ -356,7 +356,7 @@ class: custom-slide
 
 <style>
 .custom-slide .remark-code, .custom-slide .remark-inline-code {
-    font-size: 12px;
+    font-size: 14px;
 }
 </style>
 
@@ -394,7 +394,7 @@ class: custom-slide
 
 <style>
 .custom-slide .remark-code, .custom-slide .remark-inline-code {
-    font-size: 10px;
+    font-size: 12px;
 }
 </style>
 
