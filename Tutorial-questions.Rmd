@@ -152,6 +152,13 @@ toilets <- toilets |>
 (Hint: Use package "GGally" to generate a parallel coordinates plot. Beware of NA's!)
 
 ```{r}
+beers_original <- read.csv("./data/beers.csv")
+
+beers_test <- beers_original |>
+  filter(ibu != "NA") |>
+  slice(1:20)
+
+# Put your answer here:
 
 ```
 
