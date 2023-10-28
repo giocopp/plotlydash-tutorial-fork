@@ -12,7 +12,7 @@ We will dive into the fascinating world of interactive data visualization with t
 ## 📑 Contents
 - **Presentation Slides** [[.html]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop-slides.html) [[.Rmd]](https://github.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/blob/main/workshop-slides.Rmd)
 - **Live Tutorial** [[.html]]() [[.Rmd]]()
-- **Data** [[Beer Consumption]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/data/beers.csv) [[Berlin Public Toilet]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/data/berliner-toiletten-standorte.csv)
+- **Data** [[Breweries and Beers by Style and US State]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/data/beers.csv) [[Berlin Public Toilet]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/data/berliner-toiletten-standorte.csv)
 
 <br>
 
@@ -30,9 +30,8 @@ In a data-intensive world, understanding and communicating complex data effectiv
 - **Plotly**
   An introduction to the R library, its benefits, and some visualization examples . 
   - What is Plotly?
-  - Key Features
   - Advantages of using Plotly
-  - Best Practices
+  - Main distinctive features: the building blocks
   - Examples and code breakdown
 
 - **Dash**
@@ -40,7 +39,6 @@ In a data-intensive world, understanding and communicating complex data effectiv
   - What is Dash? Why integrate with Plotly?
   - Key features
   - Advantages of using Dash
-  - Best Practices
   - Examples and code breakdown
   
 - **Live Tutorial**: A hands-on session covering:
@@ -68,7 +66,7 @@ In a data-intensive world, understanding and communicating complex data effectiv
 <br>
 
 ## 📚 Resources
-For those eager to delve deeper into Plotly and Dash, here's a short list of resources:
+Here's a short list of resources if you want to dig deeper:
 
 - [Full Plotly Official R Graphing Library](https://plotly.com/r/) 
 

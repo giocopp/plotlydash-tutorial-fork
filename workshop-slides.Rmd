@@ -184,7 +184,7 @@ fig1a <- beers %>%
 ]
 
   .pull-right[
-```{r, echo=F, fig.width = 6.75, fig.height = 5}
+```{r, echo=F, fig.width = 6.25, fig.height = 5}
 fig1a
 ```
 ]
@@ -222,7 +222,7 @@ fig1b <- beers %>%
 
 
   .pull-right[
-```{r, echo=F, fig.width = 6.75, fig.height = 5}
+```{r, echo=F, fig.width = 6.25, fig.height = 5}
 fig1b
 ```
 ]
@@ -250,7 +250,7 @@ fig2 <- beers %>% count(style_group) %>%
 ]
 
 .pull-right[
-```{r, echo=F, fig.width = 6.75, fig.height = 5}
+```{r, echo=F, fig.width = 6.25, fig.height = 5}
 fig2
 ```
 ]
@@ -283,7 +283,7 @@ fig3 <- beers %>%
 ]
 
 .pull-right[
-```{r, echo=F, fig.width = 6.75, fig.height = 5}
+```{r, echo=F, fig.width = 6.25, fig.height = 5}
 fig3
 ```
 ]
@@ -322,7 +322,7 @@ fig4 <- beers %>%
 ]
 
 .pull-right[
-```{r, echo=F, fig.width = 6.75, fig.height = 5}
+```{r, echo=F, fig.width = 6.25, fig.height = 5}
 fig4
 ```
 ]
@@ -352,7 +352,8 @@ So, how to customize?
 Only by combining the *text* aesthetic in ggplot2 with the *tootlip*  argument (and [other customization options](https://plotly.com/ggplot2/)) in ggplotly, you can achieve a wide range of tooltip customizations in your interactive plots!
 
 ```{r}
-p <- ggplot(mtcars, aes(x = mpg, y = wt, text = paste("Car:", rownames(mtcars)))) +
+p <- ggplot(mtcars, aes(x = mpg, y = wt, 
+                        text = paste("Car:", rownames(mtcars)))) +
   geom_point()
 
 p_interactive <- ggplotly(p, tooltip = "text")  
@@ -379,7 +380,8 @@ california_beers <- beers %>%
   filter(state == "CA")
 
 # Plot
-ggplot_ca_breweries <- ggplot(california_beers, aes(x = brewery, fill = style_group)) +
+ggplot_ca_breweries <- ggplot(california_beers, 
+                              aes(x = brewery, fill = style_group)) +
   geom_bar(position = "stack") +
   scale_fill_viridis_d() +
   theme_minimal() +
@@ -391,7 +393,7 @@ ggplot_ca_breweries <- ggplot(california_beers, aes(x = brewery, fill = style_gr
 ]
 
  .pull-right[
-```{r, echo=F, fig.width = 6.75, fig.height = 5}
+```{r, echo=F, fig.width = 6.25, fig.height = 5}
 ggplot_ca_breweries
 ```
 ]
@@ -420,8 +422,8 @@ california_beers_percentage <- california_beers %>%
   mutate(percentage = round(n / sum(n) * 100, 2))
 
 ggplot_ca_breweries_percentage <- ggplot(california_beers_percentage, 
-                                         aes(x = brewery, fill = style_group, 
-                                             text = paste(style_group, ":", percentage, "%"))) +
+                                  aes(x = brewery, fill = style_group, 
+                                  text = paste(style_group, ":", percentage, "%"))) +
   geom_bar(aes(y = n), stat = "identity", position = "stack") +
   scale_fill_viridis_d() +
   theme_minimal() +
@@ -435,7 +437,7 @@ p_plotly_ca_breweries <- ggplotly(ggplot_ca_breweries_percentage, tooltip = "tex
 ]
 
  .pull-right[
-```{r, echo=F, fig.width = 7.75, fig.height = 6}
+```{r, echo=F, fig.width = 7.25, fig.height = 6}
 p_plotly_ca_breweries
 ```
 ]
@@ -521,7 +523,8 @@ We will first create a Plotly [`scattermapbox`](https://plotly.com/r/scattermapb
 ```{r}
 map = toilets |>
   filter(District != "NA") |>
-  plot_ly(lat = ~Latitude, lon = ~Longitude, type = "scattermapbox",
+  plot_ly(lat = ~Latitude, lon = ~Longitude, 
+          type = "scattermapbox",
           split = ~District, size = 5,
           hoverinfo = "text+name", hovertext = ~Street) |>
   layout(
@@ -537,7 +540,7 @@ map = toilets |>
 .pull-right[
 <div align="center">
 <br>
-```{r, echo=F, fig.width = 7.5, fig.height = 6}
+```{r, echo=F, fig.width = 7.25, fig.height = 6}
 map
 ```
 </div>
