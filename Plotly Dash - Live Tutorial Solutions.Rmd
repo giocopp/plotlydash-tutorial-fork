@@ -63,13 +63,15 @@ In this context, with Plotly we refer to the R package for to create interactive
 
 - HTML web integration of graphs, makes visualization more accessible and intuitive. 
 
-### Some visualization examples.
+### Let's see some examples and exercises
 
 Many people are surprised that one is required to pay for using the public toilets in Berlin. Let's find out how far you would need to go to use a free toilet after a couple of beers with your friends.
 
 <br>
 
+### First: a nice barplot!
 Let's use this dataset for the public toilets in Berlin: [Berlin Public Toilet Data](https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/) database.
+
 <br>
 ```{r}
 #Load packages:
@@ -144,6 +146,8 @@ toilets <- toilets |>
       ))
 ```
 
+## Put you answer here:
+
 ```{r}
 #Plot the distribution using plotly:
 
@@ -158,7 +162,56 @@ toilets |> filter(District != "NA") |>
 ```
 
 **Q.2.** Can you comment on the number of free toilets vs. paid public toilets across Berlin? Based on this dataset, which district in Berlin has the highest and lowest number of free public toilets?
+
 <br>
+
+### Second: A bubble chart!
+Try to code a bubble chart according to these instructions:
+- The x-axis represents the abv (alcohol by volume).
+- The y-axis represents the average_ibu (average bitterness level) for each combination of style_group and abv.
+- The size of each bubble is determined by the number of beers (count) that fall into each combination of style_group and abv.
+- The color of the bubbles is determined by the style_group.
+- Use the plot_ly function to create the bubble chart with data from agg_data_2.
+- Try to determine the size of the bubbles by the count column of agg_data_2, with sizes ranging from 10 to 800.
+- Determine the  color of the bubbles by the style_group column, with colors taken from the "Set1" color palette.
+- Hover text for each bubble using the paste function, showing details about style_group, abv, and average_ibu.
+- Use the layout function to set the chart title, axis titles, and other visualization properties.
+- Add the number of beers for each combination as a hovertext for each bubble.
+
+Use the following data:
+```{r}
+# Create the bubble chart
+agg_data_2 <- beers %>%
+  group_by(style_group, abv) %>%
+  summarise(
+    average_ibu = mean(ibu, na.rm = TRUE),
+    count = n()
+    )
+```
+
+## Put you answer here:
+```{r}
+# Create the bubble chart 
+plot <- plot_ly(data = agg_data_2, x = ~abv, y = ~average_ibu, 
+                text = ~paste("Style:", style_group, 
+                              "<br>ABV:", abv, 
+                              "<br>Avg IBU:", round(average_ibu, 1),
+                              "<br>No. of Beers:", count), # Enhanced hover text
+                size = ~count, sizes = c(10, 800),
+                mode = "markers", marker = list(opacity = 0.5),
+                color = ~style_group, colors = "Set1") %>%
+  layout(title = "Bubble Chart of Average IBU by ABV and Style Group",
+         xaxis = list(title = "ABV"),
+         yaxis = list(title = "Average IBU"),
+         hovermode = "closest",
+         showlegend = TRUE)
+
+plot
+
+```
+
+
+
 
 # Dash
 ### What is Dash?
