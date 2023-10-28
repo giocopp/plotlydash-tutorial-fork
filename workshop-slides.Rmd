@@ -229,33 +229,29 @@ class: custom-slide
 
 # Plotly more in-deep
 ### ggplotly(): Transforming a ggplot graph into an interactive plotly graph!
-We have a ggplot histogram that we want to transform into a plotly with ggplotly():
+We have a ggplot histogram that we want to transform into a plotly with ggplotly(). For example, we want to explore the beer production in California (the biggest beer producer in the US).
 
 .pull-left[
 ```{r}
-beers_clean <- beers_original %>%
-    group_by(state) %>%
-    summarize(
-      total_beers = n(),
-      ale_count = sum(str_detect(style, "Ale") | str_detect(style, "IPA")),
-      ale_percentage = (ale_count / total_beers) * 100
-    )
-  
-ggplot_1 <-  beers_clean %>%
-    ggplot(aes(x = reorder(state, -ale_count))) +
-    geom_bar(aes(y = total_beers, fill = "Total Beers"), stat = "identity", position = "dodge") +
-    geom_bar(aes(y = ale_count, fill = "ALE Beers"), stat = "identity", position = "dodge") +
-    coord_flip() +
-    labs(title = "Comparison of Total Beers and ALE Beers by State",
-         x = "State",
-         y = "Count") +
-    scale_fill_manual(values = c("Total Beers" = "gold", "ALE Beers" = "goldenrod"))
+# Filter data for California
+california_beers <- beers %>%
+  filter(state == "CA")
+
+# Plot
+ggplot_ca_breweries <- ggplot(california_beers, aes(x = brewery, fill = style_group)) +
+  geom_bar(position = "stack") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  labs(title = "Types of Beer Produced by Breweries in California", 
+       x = "Brewery", 
+       y = "Count") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 ```
 ]
 
  .pull-right[
 ```{r, echo=F, fig.width = 6.75, fig.height = 5}
-ggplot_1
+ggplot_ca_breweries
 ```
 ]
 
@@ -264,7 +260,7 @@ class: custom-slide
 
 <style>
 .custom-slide .remark-code, .custom-slide .remark-inline-code {
-    font-size: 10px;
+    font-size: 14px;
 }
 </style>
 
@@ -275,39 +271,30 @@ Here, when you hover over the graph, you will be able to see the top 3 more alch
 
 .pull-left[
 ```{r}
-top_beers_by_state <- beers %>%
-    group_by(state) %>%
-    top_n(3, abv) %>%
-    summarize(tooltip = paste(beer, "(", style, ")", collapse = "\n"))
+california_beers_percentage <- california_beers %>%
+  group_by(brewery, style_group) %>%
+  tally() %>%
+  group_by(brewery) %>%
+  mutate(percentage = round(n / sum(n) * 100, 2))
 
-top_ale_beers_by_state <- beers %>%
-    filter(str_detect(style, "Ale") | str_detect(style, "IPA")) %>%
-    group_by(state) %>%
-    top_n(3, abv) %>%
-    summarize(top_ale_tooltip = paste(beer, "(", style, ")", collapse = "\n"))
+ggplot_ca_breweries_percentage <- ggplot(california_beers_percentage, 
+                                         aes(x = brewery, fill = style_group, 
+                                             text = paste(style_group, ":", percentage, "%"))) +
+  geom_bar(aes(y = n), stat = "identity", position = "stack") +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  labs(title = "Types of Beer Produced by Breweries in California", 
+       x = "Brewery", 
+       y = "Count") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
 
-beers_clean_join <- beers_clean %>%
-    left_join(top_beers_by_state, by = "state") %>%
-    left_join(top_ale_beers_by_state, by = "state")
-
-ggplot_2 <-  beers_clean_join %>%
-    ggplot(aes(x = reorder(state, -ale_count))) +
-    geom_bar(aes(y = total_beers, fill = "Total Beers", text = tooltip), stat = "identity", position = "dodge") +
-    geom_bar(aes(y = ale_count, fill = "ALE Beers", text = top_ale_tooltip), stat = "identity", position = "dodge") +
-    coord_flip() +
-    labs(title = "Comparison of Total Beers and ALE Beers by State",
-         x = "State",
-         y = "Count") +
-    scale_fill_manual(values = c("Total Beers" = "gold", "ALE Beers" = "goldenrod"))
-
-plotly_graph_2 <- ggplotly(ggplot_2, tooltip = "text")
+p_plotly_ca_breweries <- ggplotly(ggplot_ca_breweries_percentage, tooltip = "text")
 ```
 ]
 
  .pull-right[
-```{r, echo=F, fig.width = 6.75, fig.height = 5}
-plotly_graph_2
-
+```{r, echo=F, fig.width = 7.75, fig.height = 6}
+p_plotly_ca_breweries
 ```
 ]
 ---

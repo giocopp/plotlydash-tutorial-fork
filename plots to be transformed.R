@@ -4,6 +4,8 @@ library(dplyr)
 library(stringr)
 library(viridis)
 
+View(beers)
+
 # data manipulation
   beers_clean <- beers %>%
     group_by(state) %>% 
@@ -51,19 +53,24 @@ library(viridis)
   plotly_obj_2
   
   # third plot:
- plot_3 <- beers_clean %>%
-    ggplot(aes(x = total_beers, y = ale_count, label = state)) +
-    geom_point(aes(color = ale_percentage), size = 3) +
-    geom_text(check_overlap = TRUE, vjust = 1.5, hjust = 1.5) +
-    scale_color_viridis(option = "inferno") +  
-    labs(title = "ALE Beers vs Total Beers by State",
-         x = "Total Beers",
-         y = "ALE Beers",
-         color = "ALE %") +
-    theme_minimal()
+ beer_percentages <- beers %>%
+   group_by(state, brewery, style_group) %>%
+   tally() %>%
+   group_by(state, brewery) %>%
+   mutate(percentage = round(n / sum(n) * 100, 2))
  
- plotly_obj_3 <- ggplotly(plot_3)
- plotly_obj_3
+ p <- ggplot(beer_percentages, aes(x = state, y = percentage, fill = style_group, 
+                                   text = paste("brewery:", brewery))) +
+   geom_bar(stat = "identity") +
+   scale_fill_viridis_d() +
+   theme_minimal() +
+   labs(title = "Percentage of Beer Types by Brewery and State", 
+        x = "State", 
+        y = "Percentage") +
+   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+ 
+ p_plotly <- ggplotly(p)
+ p_plotly
 
   # fourth plot:
  plot_4 <- beers_clean %>%
