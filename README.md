@@ -51,10 +51,10 @@ In a data-intensive world, understanding and communicating complex data effectiv
 
 ## 📊 Dataset Information
 
-### Beer Consumption by US State
+### Breweries and Beers by Style and US State
 **Description**: This dataset offers a detailed insight into beer consumption trends across US states, covering aspects like craft beer production, overall beer consumption, and brewery count. 
 
-**Link**: [Beer Consumption Data](https://github.com/plotly/datasets/blob/master/beers.csv)
+**Link**: [Breweries and Beers by Style and US State Data](https://github.com/plotly/datasets/blob/master/beers.csv)
 
 
 ### Berlin Public Toilet
