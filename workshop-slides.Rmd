@@ -333,9 +333,10 @@ class: custom-slide
 # ggplot - plotly interaction
 ### ggplotly(): Transforming a ggplot graph into an interactive plotly graph!
 
-Good news if you are already experienced with `ggplot`! You can use  it to create  `plotly` graphs
+Good news if you are already experienced with `ggplot`! You can use  it to create  `plotly` graphs!
 <br>
 --
+<br>
 **Tooltip** and **Hovertext** in `ggplotly`:
 The default behavior (without specifications) is to display the mapped aesthetics in the tooltip. For instance, if you have mapped the x and y aesthetics, then hovering over a point will display the x and y values in the tooltip... a bit redundant...
 
