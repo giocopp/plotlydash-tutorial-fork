@@ -145,7 +145,13 @@ These can be highly customized: more info [here](https://plotly.com/r/hover-text
 
 Some cool, non-trivial, yet not too complex, visualization that encapsulate the power of Plotly:
 <br>
-Let's play around a bit with the [Beer Consumption by US State Data](https://github.com/plotly/datasets/blob/master/beers.csv) `r emo::ji("beer")`!
+Let's play around a bit with the [Breweries and Beers by Style and US State Data](https://github.com/plotly/datasets/blob/master/beers.csv) `r emo::ji("beer")`!
+
+For the variables (ref: [Growler Guys](https://thegrowlerguys.com/understanding-abv-and-ibu/)):
+* `abv` - Alcohol by Volume (ABV), a standard measurement of alcohol content
+* `ibu` - International Bitterness Units (IBU), ranges from 5 to 100+. A beer over 60 is considered bitter.
+* `style_group` - eight beer types and "other" in the dataset (pre-processed) 
+* `state` - US state
 
 We will create:
 1. Histogram of ABV
@@ -162,7 +168,7 @@ class: custom-slide
 }
 </style>
 
-# Plotly more in-dept: Examples
+# Plotly more in-depth: Examples
 ### Example 1: Histogram
 
 Let's create a plotly graph plotting the 'alcohol by volume' `abv` variable against the beer 'count', to see the distribution of beer production in terms of alcohol level.
@@ -192,7 +198,7 @@ class: custom-slide
 }
 </style>
 
-# Plotly more in-dept: Examples
+# Plotly more in-depth: Examples
 ### Example 1: Histogram with formatting
 A few more arguments to `plot_ly` lets us specify `xbins` and `color`. Piping the `plot_ly` output into the `layout` function lets us add title, and axis formatting to the plot.
 <br>
@@ -230,7 +236,7 @@ class: custom-slide
 }
 </style>
 
-# Plotly more in-dept: Examples
+# Plotly more in-depth: Examples
 ### Example 2: Bar chart
 And which different types of beer are included and in which amounts? Let's see using a [`bar`](https://plotly.com/r/bar-charts/) chart of the 'count' of the `style_group` variable.<br>
 
@@ -258,7 +264,7 @@ class: custom-slide
 }
 </style>
 
-# Plotly more in-dept: Examples
+# Plotly more in-depth: Examples
 ### Example 3: Boxplot
 What about a boxplot of type [`box`](https://plotly.com/r/box-plots/) showing how alcohol level varies for different types of beer using the `style_group` variable?<br>
 
@@ -291,7 +297,7 @@ class: custom-slide
 }
 </style>
 
-# Plotly more in-dept: Examples
+# Plotly more in-depth: Examples
 ### Example 4: Scatter plot
 And what about comparing alcohol level against bitterness? We need a [`scatter`](https://plotly.com/r/line-and-scatter/) plot!
 * Notice how the `color` and the powerful interactive `hovertext` arguments work to enhance the plot
@@ -457,12 +463,85 @@ Essentially, when changing a dropdown or move a slider, a callback updates a cha
     interactive dashboard where each component can talk to others.
 
 ---
-# Dash!
+# Plotly-Dash!
 ### Some visualization examples.
 
 A cool, non-trivial, yet not too complex, visualization that encapsulate the power of Dash:
 <br>
-Let's create a dash with a map of the public toilet in Berlin using the [Berlin Public Toilet Data](https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/) `r emo::ji("toilet")`, for example ???
+Let's create a dash with a map of the public toilets in Berlin using the [Berlin Public Toilet Data](https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/) `r emo::ji("toilet")`. Each included toilet has data for its:
+* Location: `Latitude`, `Longitude`, `PostalCode` mutated to `District`
+* Cost: mutated to "Free" or "Paid"
+* Services available: handicap accessible, changing table, etc.
+
+We will:
+1. "Plot" the toilets to a location-based Plotly **Scatter Map**
+2. Add **input components** to filter by cost and services
+3. Use **callbacks** to connect the inputs to the map (as output)
+4. Design the **layout** and run the Dash App!
+
+```{r, include=F}
+#Load toilets dataset
+toilets <- read.csv("./data/berliner-toiletten-standorte.csv")
+#Mutations for presentation and tutorial
+toilets <- toilets |>
+  mutate(District = case_when(
+        (PostalCode >= 10115 & PostalCode <= 10179) | (PostalCode >= 13347 & PostalCode <= 13359) ~ "Mitte-Wedding",
+        (PostalCode >= 10179 & PostalCode <= 10249) | (PostalCode >= 10961 & PostalCode <= 10999) ~ "Friedrichshain-Kreuzberg",
+        (PostalCode >= 10367 & PostalCode <= 10407) | (PostalCode >= 10318 & PostalCode <= 10319) ~ "Lichtenberg",
+        (PostalCode >= 10405 & PostalCode <= 10439) | (PostalCode >= 13086 & PostalCode <= 13129) ~ "Pankow",
+        (PostalCode >= 10585 & PostalCode <= 10779) | (PostalCode >= 12159 & PostalCode <= 12163) | (PostalCode >= 13629 & PostalCode <= 14053) ~ "Charlottenburg-Wilmersdorf",
+        (PostalCode >= 12099 & PostalCode <= 12109) | (PostalCode >= 10777 & PostalCode <= 10783) | (PostalCode >= 10823 & PostalCode <= 10829) | (PostalCode >= 12305 & PostalCode <= 12309) | (PostalCode >= 12277 & PostalCode <= 12279) ~ "Tempelhof-Schöneberg",
+        (PostalCode >= 10999 & PostalCode <= 12059) | (PostalCode >= 12555 & PostalCode <= 12559) | (PostalCode >= 12487 & PostalCode <= 12489) ~ "Treptow-Köpenick",
+        (PostalCode >= 12163 & PostalCode <= 12169) | (PostalCode >= 14163 & PostalCode <= 14169) | (PostalCode >= 12203 & PostalCode <= 12209) | (PostalCode >= 12247 & PostalCode <= 12249) | (PostalCode == 14109) ~ "Steglitz-Zehlendorf",
+        (PostalCode >= 13407 & PostalCode <= 13439) | (PostalCode >= 13505 & PostalCode <= 13509) ~ "Reinickendorf",
+        (PostalCode >= 12043 & PostalCode <= 12059) ~ "Neukölln",
+        (PostalCode >= 12679 & PostalCode <= 12689) ~ "Marzahn-Hellersdorf",
+        (PostalCode >= 13599 & PostalCode <= 13629 ~ "Spandau")
+      )) |>
+  mutate(Free = if_else(Price == 0, "free", "paid")) |>
+  mutate(Accessibility = if_else(isHandicappedAccessible == 0, "Handicapped Accessible", "Not Handicapped Accessible")) |>
+  mutate(BabyFacilities = if_else(hasChangingTable == 0, "Changing table", "No changing table"))
+```
+
+---
+class: custom-slide
+
+<style>
+.custom-slide .remark-code, .custom-slide .remark-inline-code {
+    font-size: 12px;
+}
+</style>
+
+# Plotly-Dash
+### Step 1: Scatter Map
+We will first create a Plotly [`scattermapbox`](https://plotly.com/r/scattermapbox/) using the location variables of the Toilets dataset. Important to note:
+* In the `mapbox` layout options, specify `style = 'open-street-map'` to use the free [OpenStreetMap](https://www.openstreetmap.org/) map layer, instead of the pay-for-tokens [Mapbox](https://www.mapbox.com/).
+
+.pull-left[
+```{r}
+map = toilets |>
+  filter(District != "NA") |>
+  plot_ly(lat = ~Latitude, lon = ~Longitude, type = "scattermapbox",
+          split = ~District, size = 5,
+          hoverinfo = "text+name", hovertext = ~Street) |>
+  layout(
+    title = "Berlin public toilets",
+    mapbox = list(
+      style = 'open-street-map',
+      zoom = 9,
+      center = list(lat = ~median(Latitude), lon = ~median(Longitude)))
+  )
+```
+]
+
+.pull-right[
+<div align="center">
+<br>
+```{r, echo=F, fig.width = 7.5, fig.height = 6}
+map
+```
+</div>
+]
 
 ---
 class: inverse, center, middle, custom-hr
