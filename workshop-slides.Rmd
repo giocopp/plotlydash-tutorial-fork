@@ -130,20 +130,52 @@ class: custom-slide
     font-size: 14px;
 }
 </style>
+
 # Plotly more in-deep
 ### Example 1: Histogram
-Let's create a plotly graph plotting the 'alcohol by volume' (abv) variable against the beer 'count', to see the distribution of beer production in terms of alcohol level.
+Let's create a plotly graph plotting the 'alcohol by volume' `abv` variable against the beer 'count', to see the distribution of beer production in terms of alcohol level.
+We can do this with one line using the `plot_ly` function and specifying type [`histogram`](https://plotly.com/r/histograms/)!
+<br>
+
+  .pull-left[
+```{r}
+fig1a <- beers %>% 
+  plot_ly(x = ~abv, type = "histogram")
+```
+]
+
+  .pull-right[
+```{r, echo=F, fig.width = 6.75, fig.height = 5}
+fig1a
+```
+]
+
+---
+class: custom-slide
+
+<style>
+.custom-slide .remark-code, .custom-slide .remark-inline-code {
+    font-size: 14px;
+}
+</style>
+
+# Plotly more in-deep
+### Example 1: Histogram with formatting
+A few more arguments to `plot_ly` lets us specify `xbins` and `color`. Piping the `plot_ly` output into the `layout` function lets us add title, and axis formatting to the plot.
 <br>
 
   .pull-left[
 ```{r}
 fig1b <- beers %>% 
-  plot_ly(x = ~abv, type = "histogram", name = "ABV") |>
+  plot_ly(x = ~abv, type = "histogram",
+          xbins = list(start = 0, size = 0.005),
+          color = "orange") |>
   layout(
     title = "ABV Histogram",
-    xaxis = list(title = "Alcohol by Volume (ABV)"),
+    xaxis = list(title = "Alcohol by Volume (ABV)",
+                 tick0 = 0, dtick = 0.01),
     yaxis = list(title = "Count of beers"),
-    bargap=0.2
+    bargap = 0.05
   )
 ```
 ]
@@ -162,23 +194,25 @@ class: custom-slide
     font-size: 14px;
 }
 </style>
+
 # Plotly more in-deep
 ### Example 2: Boxplot
-What about a boxplot showing alcool level against type of beer?
+What about a boxplot of type [`box`](https://plotly.com/r/box-plots/) showing how alcohol level varies for different types of beer using the `style_group` variable?<br>
+* What patterns do you see in the data?
 
 .pull-left[
 ```{r}
-fig3a <- beers %>%
+fig2 <- beers %>%
   plot_ly(x = ~abv, 
           color = ~style_group, 
           type = "box", 
-          showlegend = T)
+          showlegend = F)
 ```
 ]
 
 .pull-right[
 ```{r, echo=F, fig.width = 6.75, fig.height = 5}
-fig3a
+fig2
 ```
 ]
 
@@ -193,13 +227,18 @@ class: custom-slide
 
 # Plotly more in-deep
 ### Example 3: Scatter plot
-And what about alchool level against bitterness? We need a scatter plot!
+And what about comparing alcohol level against bitterness? We need a [`scatter`](https://plotly.com/r/line-and-scatter/) plot!
+* Notice how the `color` and the powerful interactive `hovertext` arguments work to enhance the plot
+* What patterns do you see now? (Tip: filter out beer types in the legend)
 
 .pull-left[
 ```{r}
-fig4a <- beers |>
-  plot_ly(x = ~abv, y = ~ibu, color = ~style_group, type = "scatter", mode = "markers",
-          text = ~paste('Beer: ', beer, '</br>Style: ', style, '</br>Style Group: ', style_group)) |>
+beer_hover = ~paste('Beer: ', beer, '</br>Style: ', style, '</br>Style Group: ', style_group)
+
+fig3 <- beers %>%
+  plot_ly(x = ~abv, y = ~ibu, type = "scatter", mode = "markers",
+          color = ~style_group, 
+          hovertext = beer_hover) %>%
   layout(
     title = "Beers scatter plot: ABV vs. IBU",
     xaxis = list(title = "Alcohol by Volume (ABV)"),
@@ -213,7 +252,7 @@ fig4a <- beers |>
 <div align="center">
 <br>
 ```{r, echo=F, fig.width = 6.75, fig.height = 5}
-fig4a
+fig3
 ```
 </div>
 ]
