@@ -93,19 +93,25 @@ Both `plotly` and `dash` are interactive, but we can say that the level of inter
 --
 Plotly is actually a company headquartered in Montreal, Canada, providing online graphing, analytics, and     statistics tools, as well as scientific graphing libraries for Python, R, MATLAB, Perl, Julia, Arduino, JavaScript and REST.
     
-  In this contex, with Plotly we refer to the R package for to create interactive graphs.
+In this contex, with Plotly we refer to the R package for to create interactive graphs.
 
 --
+# Plotly
 ### Advantages of using Plotly
 
 --
 - Seamless integration with R and `ggplot2`, through the `ggplotly()` function, that converts your static plots to an interactive web-based version!
 
 --
-- Diverse range of plots and customization (wide array of chart types with extensive customization options), as well as the possibility to zoom in and out into the plot, or select a certain part of the plot and explore it specifically.
+- Diverse range of plots and customization (wide array of chart types with extensive customization options), as well as the possibility to zoom in and out into the plot, or select a certain part of the plot and explore it specifically. Users can pan, zoom, and hover over the plots to get more information.
 
 --
 - HTML web integration of graphs, makes visualization more accessible and intuitive. 
+
+---
+# Plotly
+### How does it work? Main features.
+
 
 
 ---
