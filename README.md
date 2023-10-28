@@ -85,6 +85,8 @@ Here's a short list of resources if you want to dig deeper:
 
 The material in this repository is made available under the [MIT license](http://opensource.org/licenses/mit-license.php). 
 
+ <br>
+
 ## 👋 Statement of contributions
 
 *Giorgio, Gayatri, and Lonny* wrote the code for Plotly, GGPlotly, and Dash, and prepared the presentation and practice material together. They contributed equally to all workshop materials
