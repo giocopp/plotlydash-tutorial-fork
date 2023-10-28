@@ -21,6 +21,7 @@ institute: Hertie School
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+pacman::p_load(tidyverse, readr, ggplot2, plotly, dash, GGally, hrbrthemes)
 ```
 
 <br>
@@ -71,13 +72,8 @@ Many people are surprised that one is required to pay for using the public toile
 
 ### First: a nice barplot!
 Let's use this dataset for the public toilets in Berlin: [Berlin Public Toilet Data](https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/) database.
+
 <br>
-```{r}
-#Load packages:
-library(tidyverse)
-library(plotly)
-library(dash)
-```
 
 **Q.1.** Find out the district-wise distribution of public toilets across Berlin.
 
@@ -147,12 +143,11 @@ toilets <- toilets |>
 ```{r}
 #Plot the distribution using plotly:
 
-
 ```
 
 **Q.2.** Can you comment on the number of free toilets vs. paid public toilets across Berlin? Based on this dataset, which district in Berlin has the highest and lowest number of free public toilets?
-<br>
 
+### Second: ggplotly!
 **Q.3.** Using the 'beers' dataset, use ggplot to generate a parallel coordinates plot for the first 20 beers. Then transform the ggplot to a interactive plot using ggplotly.
 (Hint: Use package "GGally" to generate a parallel coordinates plot. Beware of NA's!)
 
@@ -160,7 +155,7 @@ toilets <- toilets |>
 
 ```
 
-### Second: A bubble chart!
+### Third: A bubble chart!
 Try to code a bubble chart according to these instructions:
 - The x-axis represents the abv (alcohol by volume).
 - The y-axis represents the average_ibu (average bitterness level) for each combination of style_group and abv.
@@ -176,6 +171,20 @@ Try to code a bubble chart according to these instructions:
 Use the following data:
 ```{r}
 # Create the bubble chart
+beers <- beers_original |>
+  mutate(style_group = case_when(
+    (str_detect(style, "IPA") ~ "IPA"),
+    (str_detect(style, "Ale") ~ "Ale"),
+    (str_detect(style, "Lager") | style == "Altbier" ~ "Lager"),
+    (str_detect(style, "Pilsner") | str_detect(style, "Pilsener") ~ "Pilsner"),
+    (str_detect(style, "Stout") ~ "Stout"),
+    (str_detect(style, "Barleywine") ~ "Barleywine"),
+    (str_detect(style, "Porter") ~ "Porter"),
+    (str_detect(style, "Radler") | str_detect(style, "Fruit") ~ "Radler/Fruit"),
+    .default = "Other"
+    )
+  )
+
 agg_data_2 <- beers %>%
   group_by(style_group, abv) %>%
   summarise(
@@ -190,6 +199,7 @@ agg_data_2 <- beers %>%
 
 ```
 
+<br>
 
 # Dash
 ### What is Dash?
@@ -213,15 +223,12 @@ Essentially, when changing a dropdown or move a slider, a callback updates a cha
 We will use the same toilets dataset.
 
 ```{r}
-
-#0. Instantiate Dash App
 app <- dash_app()
 ```
 
 We mutate the table to add the columns for any specific filters that we require.
 
 ```{r}
-
 toilets <- toilets |>
   mutate(Accessibility = if_else(isHandicappedAccessible == 0, "Handicapped Accessible", "Not Handicapped Accessible")) |>
   mutate(BabyFacilities = if_else(hasChangingTable == 0, "Changing table", "No changing table"))
@@ -231,10 +238,6 @@ toilets <- toilets |>
 We would like to see the distribution of the toilets across Berlin, based on whether they are paid or not.
 
 ```{r}
-#2 Back-end controls
-
-#Input component(s)
-
 #We assign different colours to different districts.
 color_options <- c(unique(toilets$District))
 
@@ -305,9 +308,7 @@ app |> add_callback(
 We also need to define the aesthetics of the dashboard:
 
 ```{r}
-
 #3 Front-end layout
-
 layout_elements <- list(
   h1("IDS Workshop - Plotly-Dash test"),
   div("Using the Berlin Public Toilets dataset to test Scatter Map functionality..."),
@@ -336,13 +337,13 @@ app |> run_app()
 
 We can also add additional filters to the data, as and when required.
 
-**Q.4.** Find the distribution of paid public toilets in Berlin, that are also handicapped accessible and have a changing table.
+**Q.5.** Find the distribution of paid public toilets in Berlin, that are also handicapped accessible and have a changing table.
 
 ```{r}
 
 ```
 
-**Q.5.** You have just submitted the materials for the IDS workshop on Monday and it is officially the end of the mid-term exam week. You go out with your friends to grab a few beers. And the weather is really cold. Are there any free toilets in Mitte that you could use after a grabbing some drinks with your friends?
+**Q.6.** You have just submitted the materials for the IDS workshop on Monday and it is officially the end of the mid-term exam week. You go out with your friends to grab a few beers. And the weather is really cold. Are there any free toilets in Mitte that you could use after a grabbing some drinks with your friends?
 
 # Thank you!
 
