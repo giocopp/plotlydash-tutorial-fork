@@ -36,6 +36,13 @@
 <script src="workshop_presentation_files/navigation-1.1/tabsets.js"></script>
 <link href="workshop_presentation_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="workshop_presentation_files/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="workshop_presentation_files/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<script src="workshop_presentation_files/plotly-binding-4.10.2/plotly.js"></script>
+<script src="workshop_presentation_files/typedarray-0.1/typedarray.min.js"></script>
+<link href="workshop_presentation_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="workshop_presentation_files/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="workshop_presentation_files/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="workshop_presentation_files/plotly-main-2.11.1/plotly-latest.min.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -48,6 +55,107 @@
 
 
 
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -238,8 +346,6 @@ Plotly and Dash in R</h3>
 
 
 <p><br></p>
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
 <p>Data visualization is a powerful mean to understand complex data and
 communicate insights effectively, revealing the hidden patterns and
 trends that wouldn’t be obvious in tabular data, turning raw data into
@@ -249,12 +355,12 @@ enhancing the visualization possibilities offered by other static
 visualization packages such as <code>ggplot2</code>.</p>
 <p><strong>What tools allow to do so?</strong></p>
 <p>Plotly and Dash! And we will introduce both!</p>
-<p>Indeed, <code>plotly</code> and <code>dash</code> are 💫 interactive
-💫, in the sense that the user can interact with the data through the
-graph directly. This allows possibilities for higher understanding of
-the data.</p>
+<p>Indeed, <code>plotly</code> and <code>dash</code> are interactive, in
+the sense that the user can interact with the data through the graph
+directly. This allows possibilities for higher understanding of the
+data.</p>
 <div id="why-interactive-graphs" class="section level3">
-<h3>Why interactive graphs? 📊</h3>
+<h3>***Why interactive graphs?</h3>
 <ul>
 <li><p><em>Engagement</em>: Makes data come alive (interactive) and is
 more engaging for users. This increase understanding and
@@ -273,7 +379,6 @@ difference that we can hover your cursor over it, accessing further
 data. <code>dash</code> on the other hand, creates proper dashboards,
 namely HTML apps, allowing even more interaction.</p>
 </div>
-</div>
 <div id="plotly" class="section level1">
 <h1>Plotly</h1>
 <div id="what-is-plotly" class="section level3">
@@ -282,7 +387,7 @@ namely HTML apps, allowing even more interaction.</p>
 providing online graphing, analytics, and statistics tools, as well as
 scientific graphing libraries for Python, R, MATLAB, Perl, Julia,
 Arduino, JavaScript and REST.</p>
-<p>In this contex, with Plotly we refer to the R package for to create
+<p>In this context, with Plotly we refer to the R package for to create
 interactive graphs.</p>
 </div>
 <div id="advantages-of-using-plotly" class="section level3">
@@ -301,11 +406,111 @@ accessible and intuitive.</p></li>
 </div>
 <div id="some-visualization-examples." class="section level3">
 <h3>Some visualization examples.</h3>
-<p>A cool, non-trivial, yet not too complex, visualization that
-encapsulate the power of Plotly: <br> Let’s track the rise of craft beer
-production across the US over time with the <a
-href="https://github.com/plotly/datasets/blob/master/beers.csv">Beer
-Consumption by US State Data</a> 🍺, for example ???</p>
+<p>Many people are surprised that one is required to pay for using the
+public toilets in Berlin. Let’s find out how far you would need to go to
+use a free toilet after a couple of beers with your friends.</p>
+<p><br></p>
+<p>Let’s use this dataset for the public toilets in Berlin: <a
+href="https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/">Berlin
+Public Toilet Data</a> database. <br></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#Load packages:</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">library</span>(dash)</span></code></pre></div>
+<p><strong>Q.1.</strong> Find out the district-wise distribution of
+public toilets across Berlin.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">#1. Prepare data</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>toilets <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/berliner-toiletten-standorte.csv&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#C:\Users\gayat\Documents\GitHub\10-plotlydash-coppola-shejwal-chen\data</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">str</span>(toilets) <span class="co">#tibble</span></span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    440 obs. of  18 variables:
+##  $ LavatoryID             : chr  &quot;Wall_101003&quot; &quot;Wall_112911&quot; &quot;Wall_115753&quot; &quot;Wall_116738&quot; ...
+##  $ Description            : chr  &quot;Toilette Ottmachauer Steig (oberhalb Badestelle Ostufer)&quot; &quot;Toilette Uferweg &quot; &quot;Toilette Am Kiesteich 50&quot; &quot;Wall CT, Hubertusdamm&quot; ...
+##  $ City                   : chr  &quot;Berlin&quot; &quot;Berlin&quot; &quot;Berlin&quot; &quot;Berlin&quot; ...
+##  $ Street                 : chr  &quot;Krumme Lanke, Quermatenweg   (0-24 Uhr)&quot; &quot;Schlachtensee , Am Schlachtensee ggü. 145  (0-24 Uhr)&quot; &quot;Spektepark   (0-24 Uhr)&quot; &quot;Hubertusdamm ggü. 7 (0-24 Uhr)&quot; ...
+##  $ PostalCode             : chr  &quot;14109&quot; &quot;14129&quot; &quot;13589&quot; &quot;13125&quot; ...
+##  $ Country                : chr  &quot;Deutschland&quot; &quot;Deutschland&quot; &quot;Deutschland&quot; &quot;Deutschland&quot; ...
+##  $ Longitude              : num  13.2 13.2 13.2 13.5 13.2 ...
+##  $ Latitude               : num  52.5 52.4 52.5 52.6 52.5 ...
+##  $ isOwnedByWall          : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ isHandicappedAccessible: int  0 0 0 1 1 1 1 1 1 1 ...
+##  $ Price                  : num  0 0 0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
+##  $ canBePayedWithCoins    : int  0 0 0 1 1 1 1 1 1 1 ...
+##  $ canBePayedInApp        : int  0 0 0 1 1 1 1 1 1 1 ...
+##  $ canBePayedWithNFC      : int  0 0 0 1 1 1 1 1 1 1 ...
+##  $ hasChangingTable       : int  0 0 0 1 1 1 0 0 1 1 ...
+##  $ LabelID                : int  5 5 5 1 1 1 1 1 1 1 ...
+##  $ hasUrinal              : int  0 0 0 1 0 0 0 1 1 1 ...
+##  $ FID                    : int  269 NA NA 868 738 790 716 674 671 684 ...</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>toilets <span class="ot">&lt;-</span> toilets <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">Free =</span> <span class="fu">if_else</span>(Price <span class="sc">==</span> <span class="dv">0</span>, <span class="st">&quot;free&quot;</span>, <span class="st">&quot;paid&quot;</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#Filter the districts based on postal codes:</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#Sources</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#1. Wikipedia - https://simple.wikipedia.org/wiki/Postal_codes_in_Germany</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#2. Cybo - https://postal-codes.cybo.com/germany/berlin/</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>toilets <span class="ot">&lt;-</span> toilets <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">District =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10115</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10179</span>) <span class="sc">|</span> </span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">13347</span> <span class="sc">&amp;</span>PostalCode <span class="sc">&lt;=</span> <span class="dv">13359</span>) <span class="sc">~</span> <span class="st">&quot;Mitte&quot;</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>          </span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10179</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10249</span>) <span class="sc">|</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">10961</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10999</span>) <span class="sc">~</span> <span class="st">&quot;Friedrichshain-Kreuzberg&quot;</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>          </span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10367</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10407</span>) <span class="sc">|</span> </span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">10318</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10319</span>) <span class="sc">~</span> <span class="st">&quot;Lichtenberg&quot;</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>          </span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10405</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10439</span>) <span class="sc">|</span> </span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">13086</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">13129</span>) <span class="sc">~</span> <span class="st">&quot;Pankow&quot;</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>          </span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10585</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10779</span>) <span class="sc">|</span> </span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12159</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12163</span>) <span class="sc">|</span> </span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">13629</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">14053</span>) <span class="sc">~</span> <span class="st">&quot;Charlottenburg-Wilmersdorf&quot;</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>          </span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">12099</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12109</span>) <span class="sc">|</span> </span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">10777</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10783</span>) <span class="sc">|</span> </span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">10823</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10829</span>) <span class="sc">|</span> </span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12305</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12309</span>) <span class="sc">|</span> </span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12277</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12279</span>) <span class="sc">~</span> <span class="st">&quot;Tempelhof-Schöneberg&quot;</span>,</span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>          </span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10999</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12059</span>) <span class="sc">|</span> </span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12555</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12559</span>) <span class="sc">|</span> </span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12487</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12489</span>) <span class="sc">~</span> <span class="st">&quot;Treptow-Köpenick&quot;</span>,</span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a>          </span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">12163</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12169</span>) <span class="sc">|</span> </span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">14163</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">14169</span>) <span class="sc">|</span> </span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12203</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12209</span>) <span class="sc">|</span> </span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12247</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12249</span>) <span class="sc">|</span> </span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a>                                  (PostalCode <span class="sc">==</span> <span class="dv">14109</span>) <span class="sc">~</span> <span class="st">&quot;Steglitz-Zehlendorf&quot;</span>,</span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a>          </span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">13407</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">13439</span>) <span class="sc">|</span> </span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">13505</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">13509</span>) <span class="sc">~</span> <span class="st">&quot;Reinickendorf&quot;</span>,</span>
+<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a>          </span>
+<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">12043</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12059</span>) <span class="sc">~</span> <span class="st">&quot;Neukölln&quot;</span>,</span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a>          </span>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">12679</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12689</span>) <span class="sc">~</span> <span class="st">&quot;Marzahn-Hellersdorf&quot;</span>,</span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a>          </span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">13599</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">13629</span> <span class="sc">~</span> <span class="st">&quot;Spandau&quot;</span>)</span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a>      ))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#Plot the distribution using plotly:</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>toilets <span class="sc">|&gt;</span> <span class="fu">filter</span>(District <span class="sc">!=</span> <span class="st">&quot;NA&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="fu">plot_ly</span>(<span class="at">x =</span> <span class="sc">~</span>District, <span class="at">color =</span> <span class="sc">~</span>Free, <span class="at">type =</span> <span class="st">&quot;histogram&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Distribution of Public Toilets in Berlin&quot;</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;Districts of Berlin&quot;</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;No. of Public Toilets&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c617de6c891576dc3266" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-c617de6c891576dc3266">{"x":{"visdat":{"5ab038fc2c8c":["function () ","plotlyVisDat"]},"cur_data":"5ab038fc2c8c","attrs":{"5ab038fc2c8c":{"x":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"histogram"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Distribution of Public Toilets in Berlin","xaxis":{"domain":[0,1],"automargin":true,"title":"Districts of Berlin","type":"category","categoryorder":"array","categoryarray":["Charlottenburg-Wilmersdorf","Friedrichshain-Kreuzberg","Lichtenberg","Marzahn-Hellersdorf","Mitte","Pankow","Reinickendorf","Spandau","Steglitz-Zehlendorf","Tempelhof-Schöneberg","Treptow-Köpenick"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"No. of Public Toilets"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["Steglitz-Zehlendorf","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Friedrichshain-Kreuzberg","Treptow-Köpenick","Reinickendorf","Spandau","Charlottenburg-Wilmersdorf","Steglitz-Zehlendorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Steglitz-Zehlendorf","Friedrichshain-Kreuzberg","Treptow-Köpenick","Reinickendorf","Tempelhof-Schöneberg","Mitte","Charlottenburg-Wilmersdorf","Spandau","Reinickendorf","Reinickendorf","Reinickendorf","Mitte","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Mitte","Mitte","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Lichtenberg","Marzahn-Hellersdorf","Mitte","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Mitte","Reinickendorf","Reinickendorf","Friedrichshain-Kreuzberg","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Charlottenburg-Wilmersdorf","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Treptow-Köpenick","Treptow-Köpenick","Treptow-Köpenick","Treptow-Köpenick","Friedrichshain-Kreuzberg","Treptow-Köpenick","Mitte","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Treptow-Köpenick","Treptow-Köpenick","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg"],"type":"histogram","name":"free","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Pankow","Mitte","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Mitte","Mitte","Reinickendorf","Reinickendorf","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Marzahn-Hellersdorf","Treptow-Köpenick","Pankow","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Treptow-Köpenick","Treptow-Köpenick","Pankow","Pankow","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Pankow","Tempelhof-Schöneberg","Mitte","Mitte","Mitte","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Tempelhof-Schöneberg","Marzahn-Hellersdorf","Pankow","Charlottenburg-Wilmersdorf","Pankow","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Tempelhof-Schöneberg","Steglitz-Zehlendorf","Charlottenburg-Wilmersdorf","Lichtenberg","Lichtenberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Mitte","Friedrichshain-Kreuzberg","Pankow","Treptow-Köpenick","Charlottenburg-Wilmersdorf","Marzahn-Hellersdorf","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Charlottenburg-Wilmersdorf","Marzahn-Hellersdorf","Marzahn-Hellersdorf","Marzahn-Hellersdorf","Pankow","Pankow","Pankow","Pankow","Pankow","Pankow","Pankow","Lichtenberg","Pankow","Treptow-Köpenick","Treptow-Köpenick","Treptow-Köpenick","Mitte","Charlottenburg-Wilmersdorf","Tempelhof-Schöneberg","Spandau","Charlottenburg-Wilmersdorf","Mitte","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Treptow-Köpenick","Charlottenburg-Wilmersdorf","Mitte","Mitte","Mitte","Mitte","Mitte","Mitte","Reinickendorf","Reinickendorf","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Treptow-Köpenick","Friedrichshain-Kreuzberg","Tempelhof-Schöneberg","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Charlottenburg-Wilmersdorf","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Reinickendorf","Reinickendorf","Reinickendorf","Treptow-Köpenick","Steglitz-Zehlendorf","Mitte","Mitte","Treptow-Köpenick","Treptow-Köpenick","Treptow-Köpenick","Lichtenberg","Lichtenberg","Lichtenberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Mitte","Treptow-Köpenick","Lichtenberg","Pankow","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Reinickendorf","Lichtenberg","Mitte","Friedrichshain-Kreuzberg","Treptow-Köpenick","Reinickendorf","Mitte","Charlottenburg-Wilmersdorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Marzahn-Hellersdorf","Mitte","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Marzahn-Hellersdorf","Friedrichshain-Kreuzberg","Mitte","Mitte","Mitte","Mitte","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Tempelhof-Schöneberg","Lichtenberg","Friedrichshain-Kreuzberg","Tempelhof-Schöneberg","Treptow-Köpenick","Mitte","Mitte","Friedrichshain-Kreuzberg","Mitte","Charlottenburg-Wilmersdorf","Mitte","Mitte","Mitte","Mitte"],"type":"histogram","name":"paid","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><strong>Q.2.</strong> Can you comment on the number of free toilets
+vs. paid public toilets across Berlin? Based on this dataset, which
+district in Berlin has the highest and lowest number of free public
+toilets? <br></p>
 </div>
 </div>
 <div id="dash" class="section level1">
@@ -336,20 +541,117 @@ interactive dashboard where each component can talk to others.</p></li>
 </div>
 <div id="some-visualization-examples.-1" class="section level3">
 <h3>Some visualization examples.</h3>
-<p>A cool, non-trivial, yet not too complex, visualization that
-encapsulate the power of Dash: <br> Let’s create a dash with a map of
-the public toilet in Berlin using the <a
-href="https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/">Berlin
-Public Toilet Data</a> 🚽, for example ???</p>
+<p>We will use the same toilets dataset.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#0. Instantiate Dash App</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>app <span class="ot">&lt;-</span> <span class="fu">dash_app</span>()</span></code></pre></div>
+<p>We mutate the table to add the columns for any specific filters that
+we require.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>toilets <span class="ot">&lt;-</span> toilets <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Accessibility =</span> <span class="fu">if_else</span>(isHandicappedAccessible <span class="sc">==</span> <span class="dv">0</span>, <span class="st">&quot;Handicapped Accessible&quot;</span>, <span class="st">&quot;Not Handicapped Accessible&quot;</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">BabyFacilities =</span> <span class="fu">if_else</span>(hasChangingTable <span class="sc">==</span> <span class="dv">0</span>, <span class="st">&quot;Changing table&quot;</span>, <span class="st">&quot;No changing table&quot;</span>))</span></code></pre></div>
+<p>We would like to see the distribution of the toilets across Berlin,
+based on whether they are paid or not.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#2 Back-end controls</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#Input component(s)</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#We assign different colours to different districts.</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>color_options <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unique</span>(toilets<span class="sc">$</span>District))</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#We filter the toilets based on whether they are free or paid.</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>price_options <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unique</span>(toilets<span class="sc">$</span>Free))</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>price_filter <span class="ot">&lt;-</span> <span class="fu">dccChecklist</span>(</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">&#39;price-filter&#39;</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>  <span class="at">options =</span> price_options,</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>  <span class="at">value =</span> price_options <span class="co">#default, choose all</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>)</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#We can also add additional filters like accessibility for the handicapped and child facilities:</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>handicap_options <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unique</span>(toilets<span class="sc">$</span>Accessibility))</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>handicap_filter <span class="ot">&lt;-</span> <span class="fu">dccChecklist</span>(</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">&#39;handicap-filter&#39;</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>  <span class="at">options =</span> handicap_options,</span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>  <span class="at">value =</span> handicap_options <span class="co">#default, choose all</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>)</span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>baby_options <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unique</span>(toilets<span class="sc">$</span>BabyFacilities))</span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>baby_filter <span class="ot">&lt;-</span> <span class="fu">dccChecklist</span>(</span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">&#39;baby-filter&#39;</span>,</span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>  <span class="at">options =</span> baby_options,</span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a>  <span class="at">value =</span> baby_options <span class="co">#default, choose all</span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a>)</span></code></pre></div>
+<p>We assign the graph to a new variable and give instructions for
+callback based on the input(s) we provided.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#Output component(s)</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>toilets_map <span class="ot">&lt;-</span> <span class="fu">dccGraph</span>(<span class="at">id =</span> <span class="st">&#39;toilets-map&#39;</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#Callback(s)</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>app <span class="sc">|&gt;</span> <span class="fu">add_callback</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">output</span>(<span class="st">&#39;toilets-map&#39;</span>, <span class="st">&#39;figure&#39;</span>),</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>    <span class="co">#input(&#39;district-dropdown&#39;, &#39;value&#39;),</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    <span class="fu">input</span>(<span class="st">&#39;price-filter&#39;</span>, <span class="st">&#39;value&#39;</span>),</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>    <span class="fu">input</span>(<span class="st">&#39;handicap-filter&#39;</span>, <span class="st">&#39;value&#39;</span>),</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>    <span class="fu">input</span>(<span class="st">&#39;baby-filter&#39;</span>, <span class="st">&#39;value&#39;</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>  ),</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>  <span class="cf">function</span>(price_input, handicap_input, baby_input) { <span class="co">#district_input</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>    <span class="co">#function(color_input) {</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>    toilets <span class="ot">&lt;-</span> toilets <span class="sc">|&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>      <span class="fu">filter</span>(Free <span class="sc">%in%</span> price_input) <span class="sc">|&gt;</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>      <span class="fu">filter</span>(Accessibility <span class="sc">%in%</span> handicap_input) <span class="sc">|&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>      <span class="fu">filter</span>(BabyFacilities <span class="sc">%in%</span> baby_input)</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>    fig <span class="ot">=</span> toilets <span class="sc">|&gt;</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>      <span class="fu">filter</span>(District <span class="sc">!=</span> <span class="st">&quot;NA&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>      <span class="fu">plot_ly</span>(<span class="at">lat =</span> <span class="sc">~</span>Latitude, <span class="at">lon =</span> <span class="sc">~</span>Longitude, <span class="at">type =</span> <span class="st">&quot;scattermapbox&quot;</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>              <span class="at">split =</span> <span class="sc">~</span>District, <span class="at">size =</span> <span class="dv">5</span>, <span class="co">#toilets[[color_input]]</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>              <span class="at">hoverinfo =</span> <span class="st">&quot;text+name&quot;</span>, <span class="at">hovertext =</span> <span class="sc">~</span>Street) <span class="sc">|&gt;</span></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>      <span class="fu">layout</span>(</span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">&quot;Berlin public toilets&quot;</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>        <span class="at">mapbox =</span> <span class="fu">list</span>(</span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">&#39;open-street-map&#39;</span>,</span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>          <span class="at">zoom =</span> <span class="dv">10</span>,</span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>          <span class="at">center =</span> <span class="fu">list</span>(<span class="at">lat =</span> <span class="sc">~</span><span class="fu">median</span>(Latitude), <span class="at">lon =</span> <span class="sc">~</span><span class="fu">median</span>(Longitude)))</span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>      )</span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a>    <span class="fu">return</span>(fig) <span class="co">#not needed but just to be explicit</span></span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a>  }</span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>)</span></code></pre></div>
+<p>We also need to define the aesthetics of the dashboard:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co">#3 Front-end layout</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>layout_elements <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="fu">h1</span>(<span class="st">&quot;IDS Workshop - Plotly-Dash test&quot;</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="fu">div</span>(<span class="st">&quot;Using the Berlin Public Toilets dataset to test Scatter Map functionality...&quot;</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>  <span class="fu">div</span>(<span class="st">&quot;Type:&quot;</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>  price_filter,</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  <span class="fu">div</span>(<span class="st">&quot;Accessibility:&quot;</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>  handicap_filter,</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>  <span class="fu">div</span>(<span class="st">&quot;Baby facilities:&quot;</span>),</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>  baby_filter,</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>  toilets_map</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>)</span></code></pre></div>
+<p>Finally, we run the app:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co">#4 Main app</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>app <span class="sc">|&gt;</span> <span class="fu">set_layout</span>(layout_elements)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>app <span class="sc">|&gt;</span> <span class="fu">run_app</span>()</span></code></pre></div>
+<p>We can also add additional filters to the data, as and when
+required.</p>
+<p><strong>Q.3.</strong> Find the distribution of paid public toilets in
+Berlin, that are also handicapped accessible and have a changing
+table.</p>
+<p><strong>Q.4.</strong> You have just submitted the materials for the
+IDS workshop on Monday and it is officially the end of the mid-term exam
+week. You go out with your friends to grab a few beers. And the weather
+is really cold. Are there any free toilets in Mitte that you could use
+after a grabbing some drinks with your friends?</p>
 </div>
 </div>
 <div id="thank-you" class="section level1">
 <h1>Thank you!</h1>
-<p>Now… interactive tutorial!</p>
-<p>You find the .Rmd file in the repository.</p>
-<p>Download it and open it in your R Studio, so that you can follow us
-directly and complete the exercises we prepared for you directly
-there!</p>
 <p><br></p>
 </div>
 
