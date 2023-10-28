@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE,
 ```
 
 ```{r, include=F}
-pacman::p_load(tidyverse, readr, ggplot2, plotly, dash, stringr, viridis)
+pacman::p_load(tidyverse, readr, ggplot2, plotly, dash, stringr, viridis, emo)
 
 # adding datasets
 beers_original <- read_csv('./data/beers.csv')
