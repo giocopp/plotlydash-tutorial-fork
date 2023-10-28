@@ -113,6 +113,8 @@ In this contex, with Plotly we refer to the R package for to create interactive 
 ### Main distinctive features: the building blocks! `r emo::ji("hammer")`
 <br>
 Plotly's main feature is interactivity! It is achieved by a couple of operations within the `plot_ly` function:
+
+--
 * **data**: a data frame (what a surprise!)
 * **x and y**: the variables for the x and y axes, respectively 
 * **type**: the type of plot you want to create (e.g. "scatter", "bar", "box", etc).
@@ -120,6 +122,7 @@ Plotly's main feature is interactivity! It is achieved by a couple of operations
 * **color**: specifies the color of data points or lines. This can be used to distinguish between different groups or represent a 
       continuous variable
 
+--
 Nothing really interactive until now...
 
 ---
@@ -127,11 +130,13 @@ Nothing really interactive until now...
 ### Main distinctive features: the building blocks! `r emo::ji("hammer")`
 <br>
 ... What enables interaction:
+
 * **Hovertext & Tooltip**:
     - *Hovertext*: This is the text that appears when a user hovers over a specific data point or element in a Plotly plot. It's essentially a string or array of strings associated with each data point.
-
     - *Tooltip*: This is the box or interface that displays the hovertext. While "hovertext" refers specifically to the text content, "tooltip" encompasses the overall appearance and context of the hover information.
-    
+ 
+<br>   
+--
 These can be highly customized: more info [here](https://plotly.com/r/hover-text-and-formatting/) for `plot_ly` and [here](https://plotly.com/ggplot2/hover-text-and-formatting/) for `ggplot2`, using `ggplotly`.
     
 ---
@@ -157,12 +162,14 @@ class: custom-slide
 }
 </style>
 
-# Plotly more in-deep
+# Plotly more in-dept: Examples
 ### Example 1: Histogram
+
 Let's create a plotly graph plotting the 'alcohol by volume' `abv` variable against the beer 'count', to see the distribution of beer production in terms of alcohol level.
 We can do this with one line using the `plot_ly` function and specifying type [`histogram`](https://plotly.com/r/histograms/)!
 <br>
 
+--
   .pull-left[
 ```{r}
 fig1a <- beers %>% 
@@ -185,11 +192,12 @@ class: custom-slide
 }
 </style>
 
-# Plotly more in-deep
+# Plotly more in-dept: Examples
 ### Example 1: Histogram with formatting
 A few more arguments to `plot_ly` lets us specify `xbins` and `color`. Piping the `plot_ly` output into the `layout` function lets us add title, and axis formatting to the plot.
 <br>
 
+--
   .pull-left[
 ```{r}
 fig1b <- beers %>% 
@@ -206,6 +214,7 @@ fig1b <- beers %>%
 ```
 ]
 
+
   .pull-right[
 ```{r, echo=F, fig.width = 6.75, fig.height = 5}
 fig1b
@@ -221,10 +230,11 @@ class: custom-slide
 }
 </style>
 
-# Plotly more in-deep
+# Plotly more in-dept: Examples
 ### Example 2: Bar chart
 And which different types of beer are included and in which amounts? Let's see using a [`bar`](https://plotly.com/r/bar-charts/) chart of the 'count' of the `style_group` variable.<br>
 
+--
 .pull-left[
 ```{r}
 fig2 <- beers %>% count(style_group) %>%
@@ -248,10 +258,13 @@ class: custom-slide
 }
 </style>
 
-# Plotly more in-deep
+# Plotly more in-dept: Examples
 ### Example 3: Boxplot
 What about a boxplot of type [`box`](https://plotly.com/r/box-plots/) showing how alcohol level varies for different types of beer using the `style_group` variable?<br>
+
 * What patterns do you see in the data?
+
+--
 
 .pull-left[
 ```{r}
@@ -274,15 +287,17 @@ class: custom-slide
 
 <style>
 .custom-slide .remark-code, .custom-slide .remark-inline-code {
-    font-size: 14px;
+    font-size: 12px;
 }
 </style>
 
-# Plotly more in-deep
+# Plotly more in-dept: Examples
 ### Example 4: Scatter plot
 And what about comparing alcohol level against bitterness? We need a [`scatter`](https://plotly.com/r/line-and-scatter/) plot!
 * Notice how the `color` and the powerful interactive `hovertext` arguments work to enhance the plot
 * What patterns do you see now? (Tip: filter out beer types in the legend)
+
+--
 
 .pull-left[
 ```{r}
@@ -300,14 +315,10 @@ fig4 <- beers %>%
 ```
 ]
 
-
 .pull-right[
-<div align="center">
-<br>
 ```{r, echo=F, fig.width = 6.75, fig.height = 5}
 fig4
 ```
-</div>
 ]
 
 ---
@@ -319,10 +330,41 @@ class: custom-slide
 }
 </style>
 
-# Plotly more in-deep
+# ggplot - plotly interaction
 ### ggplotly(): Transforming a ggplot graph into an interactive plotly graph!
-We have a ggplot histogram that we want to transform into a plotly with ggplotly(). For example, we want to explore the beer production in California (the biggest beer producer in the US).
 
+Good news if you are already experienced with `ggplot`! You can use  it to create  `plotly` graphs
+<br>
+--
+**Tooltip** and **Hovertext** in `ggplotly`:
+The default behavior (without specifications) is to display the mapped aesthetics in the tooltip. For instance, if you have mapped the x and y aesthetics, then hovering over a point will display the x and y values in the tooltip... a bit redundant...
+
+--
+So, how to customize?
+-- 
+Using the *text* aesthetic in ggplot2 and then further control it using the *tootlip* argument in the ggplotly function!
+
+```{r}
+p <- ggplot(mtcars, aes(x = mpg, y = wt, text = paste("Car:", rownames(mtcars)))) +
+  geom_point()
+
+p_interactive <- ggplotly(p, tooltip = "text")  
+```
+
+---
+class: custom-slide
+
+<style>
+.custom-slide .remark-code, .custom-slide .remark-inline-code {
+    font-size: 12px;
+}
+</style>
+
+# ggplot - plotly interaction
+### ggplotly(): Transforming a ggplot graph into an interactive plotly graph!
+We have a   `ggplot`  histogram that we want to transform into a   `plotly`  with   `ggplotly` . For example, we want to explore the beer production in California (the biggest beer producer in the US).
+
+--
 .pull-left[
 ```{r}
 # Filter data for California
@@ -352,15 +394,16 @@ class: custom-slide
 
 <style>
 .custom-slide .remark-code, .custom-slide .remark-inline-code {
-    font-size: 14px;
+    font-size: 10px;
 }
 </style>
 
-# Plotly more in-deep
+# ggplot - plotly interaction
 ### ggplotly(): Transforming a ggplot graph into an interactive plotly graph!
 Let's see:
 Here, when you hover over the graph, you will be able to see the top 3 more alchoolic ALE style produced in every US state.
 
+--
 .pull-left[
 ```{r}
 california_beers_percentage <- california_beers %>%
@@ -389,8 +432,9 @@ p_plotly_ca_breweries <- ggplotly(ggplot_ca_breweries_percentage, tooltip = "tex
 p_plotly_ca_breweries
 ```
 ]
+
 ---
-# Dash
+# Finally, Dash!
 ### What is Dash?
 
 A web application framework for R (and Python and other programming languages) that allows creating interactive, web-based data dashboards (indeed), turning your interactive plots into full-blown web applications.
@@ -412,7 +456,7 @@ Essentially, when changing a dropdown or move a slider, a callback updates a cha
     interactive dashboard where each component can talk to others.
 
 ---
-# Dash
+# Dash!
 ### Some visualization examples.
 
 A cool, non-trivial, yet not too complex, visualization that encapsulate the power of Dash:
