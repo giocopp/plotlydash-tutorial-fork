@@ -687,20 +687,13 @@ app |> run_app()
 class: inverse, center, middle, custom-hr
 name: thank you
 
-```{css, echo=FALSE} 
-.custom-hr hr {
-    border-color: #EB811B;
-    width: 1000px;
-    margin: auto;
-    border-width: 1px 0 0 0;
-}
-```
-
 # Thank you!
 
-<div style="width:1000px; margin:auto;">
-    <hr/>
-</div>
+p.s. this is how public toilets in Berlin look like...
+
+<img src="https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/others/toilet.png" alt="How actually public toilet looks like in Berlin" width="500" style="display:block; margin:auto;">
+
+<br>
 
 Now... interactive tutorial!
 
