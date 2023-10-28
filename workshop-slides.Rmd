@@ -477,7 +477,7 @@ Let's create a dash with a map of the public toilets in Berlin using the [Berlin
 
 We will:
 1. "Plot" the toilets to a location-based Plotly **Scatter Map**
-2. Add **input components** to filter by cost and services
+2. Add **input component** to filter by cost and services and an *output component*
 3. Use **callbacks** to connect the inputs to the map (as output)
 4. Design the **layout** and run the Dash App!
 
@@ -545,6 +545,137 @@ map
 ```
 </div>
 ]
+
+
+```{r, include=F}
+#START DASH CODE HERE
+library(dash)
+
+#0. Instantiate Dash App
+app <- dash_app()
+
+```
+---
+class: custom-slide
+
+<style>
+.custom-slide .remark-code, .custom-slide .remark-inline-code {
+    font-size: 14px;
+}
+</style>
+
+# Plotly-Dash
+### Step 2: Input and Output Components
+Let's create our first [Dash Core Components](https://dash.plotly.com/r/dash-core-components) to interact with our Plotly scatter map!
+* Input: a `dccChecklist` to filter among free and paid toilets
+* Output: just a placeholder `dccGraph` that can hold any Plotly figure
+
+.pull-left[
+```{r}
+#Input: dccChecklist (interactive)
+price_options <- c(unique(toilets$Free))
+price_filter <- dccChecklist(
+ id = 'price-filter',
+ options = price_options,
+ value = price_options #default, choose all
+)
+
+```
+]
+
+.pull-right[
+```{r, echo=T, fig.width = 7.5, fig.height = 6}
+#Output: dccGraph (Plotly figures)
+toilets_map <- dccGraph(id = 'toilets-map')
+```
+]
+
+---
+class: custom-slide
+
+<style>
+.custom-slide .remark-code, .custom-slide .remark-inline-code {
+    font-size: 12px;
+}
+</style>
+
+# Plotly-Dash
+### Step 3: Callbacks
+Dash interaction is driven by [callbacks](https://dash.plotly.com/r/basic-callbacks) which require input and output component(s), and a callback function that links them.
+
+.pull-left[
+```{r}
+
+app |> add_callback(
+  output('toilets-map', 'figure'),
+  input('price-filter', 'value'),
+  function(price_input) {
+    toilets_filtered <- toilets |>
+      filter(Free %in% price_input)
+    fig = toilets_filtered |>
+      filter(District != "NA") |>
+      plot_ly(lat = ~Latitude, lon = ~Longitude, type = "scattermapbox",
+              split = ~District, size = 5,
+              hoverinfo = "text+name", hovertext = ~Street) |>
+      layout(
+        title = "Berlin public toilets",
+        mapbox = list(
+          style = 'open-street-map',
+          zoom = 9,
+          center = list(lat = ~median(Latitude), lon = ~median(Longitude)))
+      )
+    return(fig) #not needed but just to be explicit
+  }
+)
+
+```
+]
+
+.pull-right[
+<br>
+`r emo::ji("left")` 1. Specify the interactive `input`, `output` components<br>
+`r emo::ji("left")` 2. Write a function that triggers on any `input` change<br>
+`r emo::ji("left")` 3. Filter the dataset based on `price_input`<br><br><br>
+`r emo::ji("left")` 4. Call the same Plotly `scattermapbox`<br>
+<br><br><br><br><br><br>
+`r emo::ji("left")` 5. Return the output figure to fill in the placeholder `dccGraph` from step #2
+]
+
+---
+class: custom-slide
+
+<style>
+.custom-slide .remark-code, .custom-slide .remark-inline-code {
+    font-size: 14px;
+}
+</style>
+
+# Plotly-Dash
+### Step 4: Layout and Run
+Now we put it alll together for the App display [layout](https://dash.plotly.com/r/layout) using standard HTML components, and finally run the App to your browser.
+
+.pull-left[
+```{r, eval=F}
+layout_elements <- list(
+  h1("IDS Workshop - Plotly-Dash presentation"),
+  div("Using the Berlin Public Toilets dataset to learn Scatter Map functionality."),
+  br(),
+  div("Cost filter:"),
+  price_filter,
+  br(),
+  toilets_map
+)
+
+#4 Main app
+app |> set_layout(layout_elements)
+app |> run_app()
+```
+]
+
+.pull-right[
+<INSERT GIF>
+]
+
 
 ---
 class: inverse, center, middle, custom-hr
