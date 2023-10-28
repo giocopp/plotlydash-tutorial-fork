@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<meta charset="utf-8">
+<meta name="generator" content="pandoc">
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+
+
+<meta name="author" content="Giorgio Coppola, Gayatri Shejwal, Lonny Chen">
+
+
+<title>Interactive Graphs with Plotly and Dash</title>
+
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/header-attrs.js"></script>
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/sandstone.min.css" rel="stylesheet">
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/bootstrap.min.js"></script>
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/html5shiv.min.js"></script>
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/jquery-ui.min.js"></script>
+<link href="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/jquery.tocify.css" rel="stylesheet">
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/jquery.tocify.js"></script>
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/tabsets.js"></script>
+<link href="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/pagedtable.css" rel="stylesheet">
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/pagedtable.js"></script>
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/htmlwidgets.js"></script>
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/plotly.js"></script>
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/typedarray.min.js"></script>
+<link href="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/crosstalk.min.css" rel="stylesheet">
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/crosstalk.min.js"></script>
+<link href="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/plotly-latest.min.js"></script><style id="plotly.js-style-global"></style>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/custom.css" type="text/css">
+
+
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+<script type="text/javascript" src="Plotly%20Dash%20-%20Live%20Tutorial%20Solutions_files/MathJax.js"></script><style id="plotly.js-style-modebar-465202"></style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+<body data-new-gr-c-s-check-loaded="8.908.0" data-gr-ext-installed=""><div id="MathJax_Message" style="display: none;"></div>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+<ul id="tocify-header1" class="tocify-header list-group"><li class="tocify-item list-group-item active" data-unique="Plotly">Plotly</li><ul class="tocify-subheader list-group" data-tag="3"><li class="tocify-item list-group-item" data-unique="What_is_Plotly">What is Plotly?</li><li class="tocify-item list-group-item" data-unique="Advantages_of_using_Plotly">Advantages of using Plotly</li><li class="tocify-item list-group-item" data-unique="Some_visualization_examples">Some visualization examples.</li></ul></ul><ul id="tocify-header2" class="tocify-header list-group"><li class="tocify-item list-group-item" data-unique="Dash">Dash</li><ul class="tocify-subheader list-group" data-tag="3"><li class="tocify-item list-group-item" data-unique="What_is_Dash">What is Dash?</li><li class="tocify-item list-group-item" data-unique="Key_features">Key features</li><li class="tocify-item list-group-item" data-unique="Some_visualization_examples10">Some visualization examples.</li></ul></ul><ul id="tocify-header3" class="tocify-header list-group"><li class="tocify-item list-group-item" data-unique="Thank_you">Thank you!</li></ul></div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Interactive Graphs with Plotly and
+Dash</h1>
+<h3 class="subtitle">IDS Workshop on interactive data visualization
+Plotly and Dash in R</h3>
+<h4 class="author">Giorgio Coppola, Gayatri Shejwal, Lonny Chen</h4>
+
+</div>
+
+
+<p><br></p>
+<p>Data visualization is a powerful mean to understand complex data and
+communicate insights effectively, revealing the hidden patterns and
+trends that wouldn’t be obvious in tabular data, turning raw data into
+information.</p>
+<p>The tools we are going to introduce today serve exactly this purpose,
+enhancing the visualization possibilities offered by other static
+visualization packages such as <code>ggplot2</code>.</p>
+<p><strong>What tools allow to do so?</strong></p>
+<p>Plotly and Dash! And we will introduce both!</p>
+<p>Indeed, <code>plotly</code> and <code>dash</code> are interactive, in
+the sense that the user can interact with the data through the graph
+directly. This allows possibilities for higher understanding of the
+data.</p>
+<div id="why-interactive-graphs" class="section level3">
+<h3>***Why interactive graphs?</h3>
+<ul>
+<li><p><em>Engagement</em>: Makes data come alive (interactive) and is
+more engaging for users. This increase understanding and
+retention.</p></li>
+<li><p><em>Depth</em>: Allows users to drill down and explore nuances,
+as interaction allows to create narratives more easily. Users can ask
+‘why’ and get answers instantly by exploring the chart or
+graph.</p></li>
+<li><p><em>Decision-making</em>: Facilitates more informed
+decisions.</p></li>
+</ul>
+<p>Both <code>plotly</code> and <code>dash</code> are interactive, but
+we can say that the level of interaction is different:
+<code>plotly</code> appears very similar to a static plot, with the
+difference that we can hover your cursor over it, accessing further
+data. <code>dash</code> on the other hand, creates proper dashboards,
+namely HTML apps, allowing even more interaction.</p>
+</div>
+<div id="plotly" class="section level1">
+<div name="Plotly" data-unique="Plotly"></div><h1>Plotly</h1>
+<div id="what-is-plotly" class="section level3">
+<div name="What_is_Plotly" data-unique="What_is_Plotly"></div><h3>What is Plotly?</h3>
+<p>Plotly is actually a company headquartered in Montreal, Canada,
+providing online graphing, analytics, and statistics tools, as well as
+scientific graphing libraries for Python, R, MATLAB, Perl, Julia,
+Arduino, JavaScript and REST.</p>
+<p>In this context, with Plotly we refer to the R package for to create
+interactive graphs.</p>
+</div>
+<div id="advantages-of-using-plotly" class="section level3">
+<div name="Advantages_of_using_Plotly" data-unique="Advantages_of_using_Plotly"></div><h3>Advantages of using Plotly</h3>
+<ul>
+<li><p>Seamless integration with R and <code>ggplot2</code>, through the
+<code>ggplotly()</code> function, that converts your static plots to an
+interactive web-based version!</p></li>
+<li><p>Diverse range of plots and customization (wide array of chart
+types with extensive customization options), as well as the possibility
+to zoom in and out into the plot, or select a certain part of the plot
+and explore it specifically.</p></li>
+<li><p>HTML web integration of graphs, makes visualization more
+accessible and intuitive.</p></li>
+</ul>
+</div>
+<div id="some-visualization-examples." class="section level3">
+<div name="Some_visualization_examples" data-unique="Some_visualization_examples"></div><h3>Some visualization examples.</h3>
+<p>Many people are surprised that one is required to pay for using the
+public toilets in Berlin. Let’s find out how far you would need to go to
+use a free toilet after a couple of beers with your friends.</p>
+<p><br></p>
+<p>Let’s use this dataset for the public toilets in Berlin: <a href="https://www.kaggle.com/datasets/ryanjt/berlin-public-toilets-location/">Berlin
+Public Toilet Data</a> database. <br></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#Load packages:</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">library</span>(dash)</span></code></pre></div>
+<p><strong>Q.1.</strong> Find out the district-wise distribution of
+public toilets across Berlin.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">#1. Prepare data</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>toilets <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"./data/berliner-toiletten-standorte.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#C:\Users\gayat\Documents\GitHub\10-plotlydash-coppola-shejwal-chen\data</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="fu">str</span>(toilets) <span class="co">#tibble</span></span></code></pre></div>
+<pre><code>## 'data.frame':    440 obs. of  18 variables:
+##  $ LavatoryID             : chr  "Wall_101003" "Wall_112911" "Wall_115753" "Wall_116738" ...
+##  $ Description            : chr  "Toilette Ottmachauer Steig (oberhalb Badestelle Ostufer)" "Toilette Uferweg " "Toilette Am Kiesteich 50" "Wall CT, Hubertusdamm" ...
+##  $ City                   : chr  "Berlin" "Berlin" "Berlin" "Berlin" ...
+##  $ Street                 : chr  "Krumme Lanke, Quermatenweg   (0-24 Uhr)" "Schlachtensee , Am Schlachtensee ggü. 145  (0-24 Uhr)" "Spektepark   (0-24 Uhr)" "Hubertusdamm ggü. 7 (0-24 Uhr)" ...
+##  $ PostalCode             : chr  "14109" "14129" "13589" "13125" ...
+##  $ Country                : chr  "Deutschland" "Deutschland" "Deutschland" "Deutschland" ...
+##  $ Longitude              : num  13.2 13.2 13.2 13.5 13.2 ...
+##  $ Latitude               : num  52.5 52.4 52.5 52.6 52.5 ...
+##  $ isOwnedByWall          : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ isHandicappedAccessible: int  0 0 0 1 1 1 1 1 1 1 ...
+##  $ Price                  : num  0 0 0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 ...
+##  $ canBePayedWithCoins    : int  0 0 0 1 1 1 1 1 1 1 ...
+##  $ canBePayedInApp        : int  0 0 0 1 1 1 1 1 1 1 ...
+##  $ canBePayedWithNFC      : int  0 0 0 1 1 1 1 1 1 1 ...
+##  $ hasChangingTable       : int  0 0 0 1 1 1 0 0 1 1 ...
+##  $ LabelID                : int  5 5 5 1 1 1 1 1 1 1 ...
+##  $ hasUrinal              : int  0 0 0 1 0 0 0 1 1 1 ...
+##  $ FID                    : int  269 NA NA 868 738 790 716 674 671 684 ...</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>toilets <span class="ot">&lt;-</span> toilets <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">Free =</span> <span class="fu">if_else</span>(Price <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"free"</span>, <span class="st">"paid"</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#Filter the districts based on postal codes:</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#Sources</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#1. Wikipedia - https://simple.wikipedia.org/wiki/Postal_codes_in_Germany</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#2. Cybo - https://postal-codes.cybo.com/germany/berlin/</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>toilets <span class="ot">&lt;-</span> toilets <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">District =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10115</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10179</span>) <span class="sc">|</span> </span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">13347</span> <span class="sc">&amp;</span>PostalCode <span class="sc">&lt;=</span> <span class="dv">13359</span>) <span class="sc">~</span> <span class="st">"Mitte"</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>          </span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10179</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10249</span>) <span class="sc">|</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">10961</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10999</span>) <span class="sc">~</span> <span class="st">"Friedrichshain-Kreuzberg"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a>          </span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10367</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10407</span>) <span class="sc">|</span> </span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">10318</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10319</span>) <span class="sc">~</span> <span class="st">"Lichtenberg"</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a>          </span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10405</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10439</span>) <span class="sc">|</span> </span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">13086</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">13129</span>) <span class="sc">~</span> <span class="st">"Pankow"</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>          </span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10585</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10779</span>) <span class="sc">|</span> </span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12159</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12163</span>) <span class="sc">|</span> </span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">13629</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">14053</span>) <span class="sc">~</span> <span class="st">"Charlottenburg-Wilmersdorf"</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>          </span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">12099</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12109</span>) <span class="sc">|</span> </span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">10777</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10783</span>) <span class="sc">|</span> </span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">10823</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">10829</span>) <span class="sc">|</span> </span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12305</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12309</span>) <span class="sc">|</span> </span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12277</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12279</span>) <span class="sc">~</span> <span class="st">"Tempelhof-Schöneberg"</span>,</span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>          </span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">10999</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12059</span>) <span class="sc">|</span> </span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12555</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12559</span>) <span class="sc">|</span> </span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12487</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12489</span>) <span class="sc">~</span> <span class="st">"Treptow-Köpenick"</span>,</span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a>          </span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">12163</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12169</span>) <span class="sc">|</span> </span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">14163</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">14169</span>) <span class="sc">|</span> </span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12203</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12209</span>) <span class="sc">|</span> </span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">12247</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12249</span>) <span class="sc">|</span> </span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a>                                  (PostalCode <span class="sc">==</span> <span class="dv">14109</span>) <span class="sc">~</span> <span class="st">"Steglitz-Zehlendorf"</span>,</span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a>          </span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">13407</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">13439</span>) <span class="sc">|</span> </span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a>            (PostalCode <span class="sc">&gt;=</span> <span class="dv">13505</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">13509</span>) <span class="sc">~</span> <span class="st">"Reinickendorf"</span>,</span>
+<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a>          </span>
+<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">12043</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12059</span>) <span class="sc">~</span> <span class="st">"Neukölln"</span>,</span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a>          </span>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">12679</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">12689</span>) <span class="sc">~</span> <span class="st">"Marzahn-Hellersdorf"</span>,</span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a>          </span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a>          (PostalCode <span class="sc">&gt;=</span> <span class="dv">13599</span> <span class="sc">&amp;</span> PostalCode <span class="sc">&lt;=</span> <span class="dv">13629</span> <span class="sc">~</span> <span class="st">"Spandau"</span>)</span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a>      ))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co">#Plot the distribution using plotly:</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>toilets <span class="sc">|&gt;</span> <span class="fu">filter</span>(District <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="fu">plot_ly</span>(<span class="at">x =</span> <span class="sc">~</span>District, <span class="at">color =</span> <span class="sc">~</span>Free, <span class="at">type =</span> <span class="st">"histogram"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Public Toilets in Berlin"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"Districts of Berlin"</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">"No. of Public Toilets"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item html-widget-static-bound js-plotly-plot" id="htmlwidget-c617de6c891576dc3266" style="width:672px;height:480px;"><div class="plot-container plotly"><div class="user-select-none svg-container" style="position: relative; width: 672px; height: 480px;"><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="672" height="480" style="background: rgb(255, 255, 255);"><defs id="defs-465202"><g class="clips"><clipPath id="clip465202xyplot" class="plotclip"><rect width="520" height="331"></rect></clipPath><clipPath class="axesclip" id="clip465202x"><rect x="60" y="0" width="520" height="480"></rect></clipPath><clipPath class="axesclip" id="clip465202y"><rect x="0" y="25" width="672" height="331"></rect></clipPath><clipPath class="axesclip" id="clip465202xy"><rect x="60" y="25" width="520" height="331"></rect></clipPath></g><g class="gradients"></g><g class="patterns"></g></defs><g class="bglayer"></g><g class="draglayer cursor-crosshair"><g class="xy"><rect class="nsewdrag drag" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="60" y="25" width="520" height="331"></rect><rect class="nwdrag drag cursor-nw-resize" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="40" y="5" width="20" height="20"></rect><rect class="nedrag drag cursor-ne-resize" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="580" y="5" width="20" height="20"></rect><rect class="swdrag drag cursor-sw-resize" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="40" y="356" width="20" height="20"></rect><rect class="sedrag drag cursor-se-resize" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="580" y="356" width="20" height="20"></rect><rect class="ewdrag drag cursor-ew-resize" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="112" y="356.5" width="416" height="20"></rect><rect class="wdrag drag cursor-w-resize" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="60" y="356.5" width="52" height="20"></rect><rect class="edrag drag cursor-e-resize" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="528" y="356.5" width="52" height="20"></rect><rect class="nsdrag drag cursor-ns-resize" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="39.5" y="58.1" width="20" height="264.8"></rect><rect class="sdrag drag cursor-s-resize" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="39.5" y="322.90000000000003" width="20" height="33.1"></rect><rect class="ndrag drag cursor-n-resize" style="fill: transparent; stroke-width: 0px; pointer-events: all;" data-subplot="xy" x="39.5" y="25" width="20" height="33.1"></rect></g></g><g class="layer-below"><g class="imagelayer"></g><g class="shapelayer"></g></g><g class="cartesianlayer"><g class="subplot xy"><g class="layer-subplot"><g class="shapelayer"></g><g class="imagelayer"></g></g><g class="gridlayer"><g class="x"></g><g class="y"><path class="ygrid crisp" transform="translate(0,318.57)" d="M60,0h520" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="ygrid crisp" transform="translate(0,281.13)" d="M60,0h520" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="ygrid crisp" transform="translate(0,243.7)" d="M60,0h520" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="ygrid crisp" transform="translate(0,206.26)" d="M60,0h520" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="ygrid crisp" transform="translate(0,168.83)" d="M60,0h520" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="ygrid crisp" transform="translate(0,131.39)" d="M60,0h520" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="ygrid crisp" transform="translate(0,93.96)" d="M60,0h520" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path><path class="ygrid crisp" transform="translate(0,56.519999999999996)" d="M60,0h520" style="stroke: rgb(238, 238, 238); stroke-opacity: 1; stroke-width: 1px;"></path></g></g><g class="zerolinelayer"><path class="yzl zl crisp" transform="translate(0,356)" d="M60,0h520" style="stroke: rgb(68, 68, 68); stroke-opacity: 1; stroke-width: 1px;"></path></g><path class="xlines-below"></path><path class="ylines-below"></path><g class="overlines-below"></g><g class="xaxislayer-below"></g><g class="yaxislayer-below"></g><g class="overaxes-below"></g><g class="plot" transform="translate(60,25)" clip-path="url(#clip465202xyplot)"><g class="barlayer mlayer"><g class="trace bars" style="opacity: 1;"><g class="points"><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M4.73,331V196.24H23.64V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M52,331V196.24H70.91V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M99.27,331V323.51H118.18V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M146.55,331V323.51H165.45V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M193.82,331V278.59H212.73V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M241.09,331V331H260V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M288.36,331V278.59H307.27V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M335.64,331V316.03H354.55V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M382.91,331V248.64H401.82V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M430.18,331V271.1H449.09V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;" d="M477.45,331V263.62H496.36V331Z"></path></g></g></g><g class="trace bars" style="opacity: 1;"><g class="points"><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M23.64,331V158.8H42.55V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M70.91,331V16.55H89.82V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M118.18,331V263.62H137.09V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M165.45,331V271.1H184.36V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M212.73,331V91.42H231.64V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M260,331V203.72H278.91V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M307.27,331V263.62H326.18V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M354.55,331V323.51H373.45V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M401.82,331V233.67H420.73V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M449.09,331V136.34H468V331Z"></path></g><g class="point"><path style="vector-effect: non-scaling-stroke; opacity: 1; stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;" d="M496.36,331V211.21H515.27V331Z"></path></g></g></g></g></g><g class="overplot"></g><path class="xlines-above crisp" style="fill: none;" d="M0,0"></path><path class="ylines-above crisp" style="fill: none;" d="M0,0"></path><g class="overlines-above"></g><g class="xaxislayer-above"><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Charlottenburg-Wilmersdorf" data-math="N" transform="translate(83.64,0) rotate(30,0,363)">Charlottenburg-Wilmersdorf</text></g><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Friedrichshain-Kreuzberg" data-math="N" transform="translate(130.91,0) rotate(30,0,363)">Friedrichshain-Kreuzberg</text></g><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Lichtenberg" data-math="N" transform="translate(178.18,0) rotate(30,0,363)">Lichtenberg</text></g><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Marzahn-Hellersdorf" data-math="N" transform="translate(225.45,0) rotate(30,0,363)">Marzahn-Hellersdorf</text></g><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Mitte" data-math="N" transform="translate(272.73,0) rotate(30,0,363)">Mitte</text></g><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Pankow" data-math="N" transform="translate(320,0) rotate(30,0,363)">Pankow</text></g><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Reinickendorf" data-math="N" transform="translate(367.27,0) rotate(30,0,363)">Reinickendorf</text></g><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Spandau" data-math="N" transform="translate(414.55,0) rotate(30,0,363)">Spandau</text></g><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Steglitz-Zehlendorf" data-math="N" transform="translate(461.82,0) rotate(30,0,363)">Steglitz-Zehlendorf</text></g><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Tempelhof-Schöneberg" data-math="N" transform="translate(509.09,0) rotate(30,0,363)">Tempelhof-Schöneberg</text></g><g class="xtick"><text text-anchor="start" x="0" y="369" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="Treptow-Köpenick" data-math="N" transform="translate(556.36,0) rotate(30,0,363)">Treptow-Köpenick</text></g></g><g class="yaxislayer-above"><g class="ytick"><text text-anchor="end" x="59" y="4.199999999999999" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="0" data-math="N" transform="translate(0,356)">0</text></g><g class="ytick"><text text-anchor="end" x="59" y="4.199999999999999" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="5" data-math="N" transform="translate(0,318.57)">5</text></g><g class="ytick"><text text-anchor="end" x="59" y="4.199999999999999" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="10" data-math="N" transform="translate(0,281.13)">10</text></g><g class="ytick"><text text-anchor="end" x="59" y="4.199999999999999" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="15" data-math="N" transform="translate(0,243.7)">15</text></g><g class="ytick"><text text-anchor="end" x="59" y="4.199999999999999" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="20" data-math="N" transform="translate(0,206.26)">20</text></g><g class="ytick"><text text-anchor="end" x="59" y="4.199999999999999" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="25" data-math="N" transform="translate(0,168.83)">25</text></g><g class="ytick"><text text-anchor="end" x="59" y="4.199999999999999" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="30" data-math="N" transform="translate(0,131.39)">30</text></g><g class="ytick"><text text-anchor="end" x="59" y="4.199999999999999" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="35" data-math="N" transform="translate(0,93.96)">35</text></g><g class="ytick"><text text-anchor="end" x="59" y="4.199999999999999" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre; opacity: 1;" data-unformatted="40" data-math="N" transform="translate(0,56.519999999999996)">40</text></g></g><g class="overaxes-above"></g></g></g><g class="polarlayer"></g><g class="smithlayer"></g><g class="ternarylayer"></g><g class="geolayer"></g><g class="funnelarealayer"></g><g class="pielayer"></g><g class="iciclelayer"></g><g class="treemaplayer"></g><g class="sunburstlayer"></g><g class="glimages"></g></svg><div class="gl-container"></div><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="672" height="480"><defs id="topdefs-465202"><g class="clips"></g><clipPath id="legend465202"><rect width="72" height="48" x="0" y="0"></rect></clipPath></defs><g class="indicatorlayer"></g><g class="layer-above"><g class="imagelayer"></g><g class="shapelayer"></g></g><g class="infolayer"><g class="legend" pointer-events="all" transform="translate(590.4,25)"><rect class="bg" shape-rendering="crispEdges" style="stroke: rgb(68, 68, 68); stroke-opacity: 1; fill: rgb(255, 255, 255); fill-opacity: 1; stroke-width: 0px;" width="72" height="48" x="0" y="0"></rect><g class="scrollbox" transform="" clip-path="url(#legend465202)"><g class="groups"><g class="traces" style="opacity: 1;" transform="translate(0,14.5)"><text class="legendtext" text-anchor="start" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;" x="40" y="4.680000000000001" data-unformatted="free" data-math="N">free</text><g class="layers" style="opacity: 1;"><g class="legendfill"></g><g class="legendlines"></g><g class="legendsymbols"><g class="legendpoints"><path class="legendundefined" d="M6,6H-6V-6H6Z" transform="translate(20,0)" style="stroke-width: 0px; fill: rgb(102, 194, 165); fill-opacity: 1;"></path></g></g></g><rect class="legendtoggle" style="cursor: pointer; fill: rgb(0, 0, 0); fill-opacity: 0;" pointer-events="all" x="0" y="-9.5" width="66.38333129882812" height="19"></rect></g><g class="traces" style="opacity: 1;" transform="translate(0,33.5)"><text class="legendtext" text-anchor="start" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 12px; fill: rgb(68, 68, 68); fill-opacity: 1; white-space: pre;" x="40" y="4.680000000000001" data-unformatted="paid" data-math="N">paid</text><g class="layers" style="opacity: 1;"><g class="legendfill"></g><g class="legendlines"></g><g class="legendsymbols"><g class="legendpoints"><path class="legendundefined" d="M6,6H-6V-6H6Z" transform="translate(20,0)" style="stroke-width: 0px; fill: rgb(141, 160, 203); fill-opacity: 1;"></path></g></g></g><rect class="legendtoggle" style="cursor: pointer; fill: rgb(0, 0, 0); fill-opacity: 0;" pointer-events="all" x="0" y="-9.5" width="66.38333129882812" height="19"></rect></g></g></g><rect class="scrollbar" rx="20" ry="3" width="0" height="0" style="fill: rgb(128, 139, 164); fill-opacity: 1;" x="0" y="0"></rect></g><g class="g-gtitle"><text class="gtitle" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 17px; fill: rgb(68, 68, 68); opacity: 1; font-weight: normal; white-space: pre;" x="336" y="12.5" text-anchor="middle" dy="0em" data-unformatted="Distribution of Public Toilets in Berlin" data-math="N">Distribution of Public Toilets in Berlin</text></g><g class="g-xtitle" transform="translate(0,55.267120361328125)"><text class="xtitle" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 14px; fill: rgb(68, 68, 68); opacity: 1; font-weight: normal; white-space: pre;" x="320" y="408" text-anchor="middle" data-unformatted="Districts of Berlin" data-math="N">Districts of Berlin</text></g><g class="g-ytitle"><text class="ytitle" transform="rotate(-90,22,190.5)" style="font-family: &quot;Open Sans&quot;, verdana, arial, sans-serif; font-size: 14px; fill: rgb(68, 68, 68); opacity: 1; font-weight: normal; white-space: pre;" x="22" y="190.5" text-anchor="middle" data-unformatted="No. of Public Toilets" data-math="N">No. of Public Toilets</text></g></g><g class="menulayer"></g><g class="zoomlayer"></g></svg><div class="modebar-container" style="position: absolute; top: 0px; right: 0px; width: 100%;"><div id="modebar-465202" class="modebar modebar--hover ease-bg" style="z-index: 1;"><div class="modebar-group"><a rel="tooltip" class="modebar-btn" data-title="Download plot as a png" data-toggle="false" data-gravity="n"><svg viewBox="0 0 1000 1000" class="icon" height="1em" width="1em"><path d="m500 450c-83 0-150-67-150-150 0-83 67-150 150-150 83 0 150 67 150 150 0 83-67 150-150 150z m400 150h-120c-16 0-34 13-39 29l-31 93c-6 15-23 28-40 28h-340c-16 0-34-13-39-28l-31-94c-6-15-23-28-40-28h-120c-55 0-100-45-100-100v-450c0-55 45-100 100-100h800c55 0 100 45 100 100v450c0 55-45 100-100 100z m-400-550c-138 0-250 112-250 250 0 138 112 250 250 250 138 0 250-112 250-250 0-138-112-250-250-250z m365 380c-19 0-35 16-35 35 0 19 16 35 35 35 19 0 35-16 35-35 0-19-16-35-35-35z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a></div><div class="modebar-group"><a rel="tooltip" class="modebar-btn active" data-title="Zoom" data-attr="dragmode" data-val="zoom" data-toggle="false" data-gravity="n"><svg viewBox="0 0 1000 1000" class="icon" height="1em" width="1em"><path d="m1000-25l-250 251c40 63 63 138 63 218 0 224-182 406-407 406-224 0-406-182-406-406s183-406 407-406c80 0 155 22 218 62l250-250 125 125z m-812 250l0 438 437 0 0-438-437 0z m62 375l313 0 0-312-313 0 0 312z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a><a rel="tooltip" class="modebar-btn" data-title="Pan" data-attr="dragmode" data-val="pan" data-toggle="false" data-gravity="n"><svg viewBox="0 0 1000 1000" class="icon" height="1em" width="1em"><path d="m1000 350l-187 188 0-125-250 0 0 250 125 0-188 187-187-187 125 0 0-250-250 0 0 125-188-188 186-187 0 125 252 0 0-250-125 0 187-188 188 188-125 0 0 250 250 0 0-126 187 188z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a><a rel="tooltip" class="modebar-btn" data-title="Box Select" data-attr="dragmode" data-val="select" data-toggle="false" data-gravity="n"><svg viewBox="0 0 1000 1000" class="icon" height="1em" width="1em"><path d="m0 850l0-143 143 0 0 143-143 0z m286 0l0-143 143 0 0 143-143 0z m285 0l0-143 143 0 0 143-143 0z m286 0l0-143 143 0 0 143-143 0z m-857-286l0-143 143 0 0 143-143 0z m857 0l0-143 143 0 0 143-143 0z m-857-285l0-143 143 0 0 143-143 0z m857 0l0-143 143 0 0 143-143 0z m-857-286l0-143 143 0 0 143-143 0z m286 0l0-143 143 0 0 143-143 0z m285 0l0-143 143 0 0 143-143 0z m286 0l0-143 143 0 0 143-143 0z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a><a rel="tooltip" class="modebar-btn" data-title="Lasso Select" data-attr="dragmode" data-val="lasso" data-toggle="false" data-gravity="n"><svg viewBox="0 0 1031 1000" class="icon" height="1em" width="1em"><path d="m1018 538c-36 207-290 336-568 286-277-48-473-256-436-463 10-57 36-108 76-151-13-66 11-137 68-183 34-28 75-41 114-42l-55-70 0 0c-2-1-3-2-4-3-10-14-8-34 5-45 14-11 34-8 45 4 1 1 2 3 2 5l0 0 113 140c16 11 31 24 45 40 4 3 6 7 8 11 48-3 100 0 151 9 278 48 473 255 436 462z m-624-379c-80 14-149 48-197 96 42 42 109 47 156 9 33-26 47-66 41-105z m-187-74c-19 16-33 37-39 60 50-32 109-55 174-68-42-25-95-24-135 8z m360 75c-34-7-69-9-102-8 8 62-16 128-68 170-73 59-175 54-244-5-9 20-16 40-20 61-28 159 121 317 333 354s407-60 434-217c28-159-121-318-333-355z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a></div><div class="modebar-group"><a rel="tooltip" class="modebar-btn" data-title="Zoom in" data-attr="zoom" data-val="in" data-toggle="false" data-gravity="n"><svg viewBox="0 0 875 1000" class="icon" height="1em" width="1em"><path d="m1 787l0-875 875 0 0 875-875 0z m687-500l-187 0 0-187-125 0 0 187-188 0 0 125 188 0 0 187 125 0 0-187 187 0 0-125z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a><a rel="tooltip" class="modebar-btn" data-title="Zoom out" data-attr="zoom" data-val="out" data-toggle="false" data-gravity="n"><svg viewBox="0 0 875 1000" class="icon" height="1em" width="1em"><path d="m0 788l0-876 875 0 0 876-875 0z m688-500l-500 0 0 125 500 0 0-125z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a><a rel="tooltip" class="modebar-btn" data-title="Autoscale" data-attr="zoom" data-val="auto" data-toggle="false" data-gravity="n"><svg viewBox="0 0 1000 1000" class="icon" height="1em" width="1em"><path d="m250 850l-187 0-63 0 0-62 0-188 63 0 0 188 187 0 0 62z m688 0l-188 0 0-62 188 0 0-188 62 0 0 188 0 62-62 0z m-875-938l0 188-63 0 0-188 0-62 63 0 187 0 0 62-187 0z m875 188l0-188-188 0 0-62 188 0 62 0 0 62 0 188-62 0z m-125 188l-1 0-93-94-156 156 156 156 92-93 2 0 0 250-250 0 0-2 93-92-156-156-156 156 94 92 0 2-250 0 0-250 0 0 93 93 157-156-157-156-93 94 0 0 0-250 250 0 0 0-94 93 156 157 156-157-93-93 0 0 250 0 0 250z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a><a rel="tooltip" class="modebar-btn" data-title="Reset axes" data-attr="zoom" data-val="reset" data-toggle="false" data-gravity="n"><svg viewBox="0 0 928.6 1000" class="icon" height="1em" width="1em"><path d="m786 296v-267q0-15-11-26t-25-10h-214v214h-143v-214h-214q-15 0-25 10t-11 26v267q0 1 0 2t0 2l321 264 321-264q1-1 1-4z m124 39l-34-41q-5-5-12-6h-2q-7 0-12 3l-386 322-386-322q-7-4-13-4-7 2-12 7l-35 41q-4 5-3 13t6 12l401 334q18 15 42 15t43-15l136-114v109q0 8 5 13t13 5h107q8 0 13-5t5-13v-227l122-102q5-5 6-12t-4-13z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a></div><div class="modebar-group"><a rel="tooltip" class="modebar-btn active" data-title="Show closest data on hover" data-attr="hovermode" data-val="closest" data-toggle="false" data-gravity="ne"><svg viewBox="0 0 1500 1000" class="icon" height="1em" width="1em"><path d="m375 725l0 0-375-375 375-374 0-1 1125 0 0 750-1125 0z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a><a rel="tooltip" class="modebar-btn" data-title="Compare data on hover" data-attr="hovermode" data-val="x" data-toggle="false" data-gravity="ne"><svg viewBox="0 0 1125 1000" class="icon" height="1em" width="1em"><path d="m187 786l0 2-187-188 188-187 0 0 937 0 0 373-938 0z m0-499l0 1-187-188 188-188 0 0 937 0 0 376-938-1z" transform="matrix(1 0 0 -1 0 850)"></path></svg></a></div><div class="modebar-group"><a href="https://plotly.com/" target="_blank" data-title="Produced with Plotly.js (v2.11.1)" class="modebar-btn plotlyjsicon modebar-btn--logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 132" height="1em" width="1em"><defs><style>.cls-1 {fill: #3f4f75;} .cls-2 {fill: #80cfbe;} .cls-3 {fill: #fff;}</style></defs><title>plotly-logomark</title><g id="symbol"><rect class="cls-1" width="132" height="132" rx="6" ry="6"></rect><circle class="cls-2" cx="78" cy="54" r="6"></circle><circle class="cls-2" cx="102" cy="30" r="6"></circle><circle class="cls-2" cx="78" cy="30" r="6"></circle><circle class="cls-2" cx="54" cy="30" r="6"></circle><circle class="cls-2" cx="30" cy="30" r="6"></circle><circle class="cls-2" cx="30" cy="54" r="6"></circle><path class="cls-3" d="M30,72a6,6,0,0,0-6,6v24a6,6,0,0,0,12,0V78A6,6,0,0,0,30,72Z"></path><path class="cls-3" d="M78,72a6,6,0,0,0-6,6v24a6,6,0,0,0,12,0V78A6,6,0,0,0,78,72Z"></path><path class="cls-3" d="M54,48a6,6,0,0,0-6,6v48a6,6,0,0,0,12,0V54A6,6,0,0,0,54,48Z"></path><path class="cls-3" d="M102,48a6,6,0,0,0-6,6v48a6,6,0,0,0,12,0V54A6,6,0,0,0,102,48Z"></path></g></svg></a></div></div></div><svg class="main-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="672" height="480"><g class="hoverlayer"></g></svg></div></div></div>
+<script type="application/json" data-for="htmlwidget-c617de6c891576dc3266">{"x":{"visdat":{"5ab038fc2c8c":["function () ","plotlyVisDat"]},"cur_data":"5ab038fc2c8c","attrs":{"5ab038fc2c8c":{"x":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"histogram"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Distribution of Public Toilets in Berlin","xaxis":{"domain":[0,1],"automargin":true,"title":"Districts of Berlin","type":"category","categoryorder":"array","categoryarray":["Charlottenburg-Wilmersdorf","Friedrichshain-Kreuzberg","Lichtenberg","Marzahn-Hellersdorf","Mitte","Pankow","Reinickendorf","Spandau","Steglitz-Zehlendorf","Tempelhof-Schöneberg","Treptow-Köpenick"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"No. of Public Toilets"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["Steglitz-Zehlendorf","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Friedrichshain-Kreuzberg","Treptow-Köpenick","Reinickendorf","Spandau","Charlottenburg-Wilmersdorf","Steglitz-Zehlendorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Steglitz-Zehlendorf","Friedrichshain-Kreuzberg","Treptow-Köpenick","Reinickendorf","Tempelhof-Schöneberg","Mitte","Charlottenburg-Wilmersdorf","Spandau","Reinickendorf","Reinickendorf","Reinickendorf","Mitte","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Mitte","Mitte","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Lichtenberg","Marzahn-Hellersdorf","Mitte","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Mitte","Reinickendorf","Reinickendorf","Friedrichshain-Kreuzberg","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Charlottenburg-Wilmersdorf","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Treptow-Köpenick","Treptow-Köpenick","Treptow-Köpenick","Treptow-Köpenick","Friedrichshain-Kreuzberg","Treptow-Köpenick","Mitte","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Treptow-Köpenick","Treptow-Köpenick","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg"],"type":"histogram","name":"free","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Pankow","Mitte","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Mitte","Mitte","Reinickendorf","Reinickendorf","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Marzahn-Hellersdorf","Treptow-Köpenick","Pankow","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Treptow-Köpenick","Treptow-Köpenick","Pankow","Pankow","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Pankow","Tempelhof-Schöneberg","Mitte","Mitte","Mitte","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Tempelhof-Schöneberg","Marzahn-Hellersdorf","Pankow","Charlottenburg-Wilmersdorf","Pankow","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Tempelhof-Schöneberg","Steglitz-Zehlendorf","Charlottenburg-Wilmersdorf","Lichtenberg","Lichtenberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Mitte","Friedrichshain-Kreuzberg","Pankow","Treptow-Köpenick","Charlottenburg-Wilmersdorf","Marzahn-Hellersdorf","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Charlottenburg-Wilmersdorf","Marzahn-Hellersdorf","Marzahn-Hellersdorf","Marzahn-Hellersdorf","Pankow","Pankow","Pankow","Pankow","Pankow","Pankow","Pankow","Lichtenberg","Pankow","Treptow-Köpenick","Treptow-Köpenick","Treptow-Köpenick","Mitte","Charlottenburg-Wilmersdorf","Tempelhof-Schöneberg","Spandau","Charlottenburg-Wilmersdorf","Mitte","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Treptow-Köpenick","Charlottenburg-Wilmersdorf","Mitte","Mitte","Mitte","Mitte","Mitte","Mitte","Reinickendorf","Reinickendorf","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Treptow-Köpenick","Friedrichshain-Kreuzberg","Tempelhof-Schöneberg","Charlottenburg-Wilmersdorf","Charlottenburg-Wilmersdorf","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Charlottenburg-Wilmersdorf","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Reinickendorf","Reinickendorf","Reinickendorf","Treptow-Köpenick","Steglitz-Zehlendorf","Mitte","Mitte","Treptow-Köpenick","Treptow-Köpenick","Treptow-Köpenick","Lichtenberg","Lichtenberg","Lichtenberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Tempelhof-Schöneberg","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Mitte","Treptow-Köpenick","Lichtenberg","Pankow","Tempelhof-Schöneberg","Friedrichshain-Kreuzberg","Reinickendorf","Lichtenberg","Mitte","Friedrichshain-Kreuzberg","Treptow-Köpenick","Reinickendorf","Mitte","Charlottenburg-Wilmersdorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Steglitz-Zehlendorf","Marzahn-Hellersdorf","Mitte","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Friedrichshain-Kreuzberg","Marzahn-Hellersdorf","Friedrichshain-Kreuzberg","Mitte","Mitte","Mitte","Mitte","Friedrichshain-Kreuzberg","Charlottenburg-Wilmersdorf","Tempelhof-Schöneberg","Lichtenberg","Friedrichshain-Kreuzberg","Tempelhof-Schöneberg","Treptow-Köpenick","Mitte","Mitte","Friedrichshain-Kreuzberg","Mitte","Charlottenburg-Wilmersdorf","Mitte","Mitte","Mitte","Mitte"],"type":"histogram","name":"paid","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p><strong>Q.2.</strong> Can you comment on the number of free toilets
+vs.&nbsp;paid public toilets across Berlin? Based on this dataset, which
+district in Berlin has the highest and lowest number of free public
+toilets? <br></p>
+</div>
+</div>
+<div id="dash" class="section level1">
+<div name="Dash" data-unique="Dash"></div><h1>Dash</h1>
+<div id="what-is-dash" class="section level3">
+<div name="What_is_Dash" data-unique="What_is_Dash"></div><h3>What is Dash?</h3>
+<p>A web application framework for R (and Python and other programming
+languages) that allows creating interactive, web-based data dashboards
+(indeed), turning your interactive plots into full-blown web
+applications.</p>
+</div>
+<div id="key-features" class="section level3">
+<div name="Key_features" data-unique="Key_features"></div><h3>Key features</h3>
+<ul>
+<li><p><strong>HTML layout</strong>: Design your dashboard layout using
+simple HTML components, without having to write any actual HTML. Indeed,
+it structure dashboard components using a set of pre-defined HTML tags
+within R.</p></li>
+<li><p>Interactivity through <strong>callbacks</strong>: callbacks
+define interactive behavior by specifying how input changes should
+modify output components. Essentially, when changing a dropdown or move
+a slider, a callback updates a chart, text, or any other component in
+real-time.</p></li>
+<li><p><strong>Integration with Plotly</strong> visualizations: Plotly
+charts can be easily included in Dash, making them part of an<br>
+interactive dashboard where each component can talk to others.</p></li>
+</ul>
+</div>
+<div id="some-visualization-examples.-1" class="section level3">
+<div name="Some_visualization_examples10" data-unique="Some_visualization_examples10"></div><h3>Some visualization examples.</h3>
+<p>We will use the same toilets dataset.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#0. Instantiate Dash App</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>app <span class="ot">&lt;-</span> <span class="fu">dash_app</span>()</span></code></pre></div>
+<p>We mutate the table to add the columns for any specific filters that
+we require.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>toilets <span class="ot">&lt;-</span> toilets <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Accessibility =</span> <span class="fu">if_else</span>(isHandicappedAccessible <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Handicapped Accessible"</span>, <span class="st">"Not Handicapped Accessible"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">BabyFacilities =</span> <span class="fu">if_else</span>(hasChangingTable <span class="sc">==</span> <span class="dv">0</span>, <span class="st">"Changing table"</span>, <span class="st">"No changing table"</span>))</span></code></pre></div>
+<p>We would like to see the distribution of the toilets across Berlin,
+based on whether they are paid or not.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#2 Back-end controls</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#Input component(s)</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#We assign different colours to different districts.</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>color_options <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unique</span>(toilets<span class="sc">$</span>District))</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#We filter the toilets based on whether they are free or paid.</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>price_options <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unique</span>(toilets<span class="sc">$</span>Free))</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>price_filter <span class="ot">&lt;-</span> <span class="fu">dccChecklist</span>(</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'price-filter'</span>,</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>  <span class="at">options =</span> price_options,</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>  <span class="at">value =</span> price_options <span class="co">#default, choose all</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>)</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#We can also add additional filters like accessibility for the handicapped and child facilities:</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>handicap_options <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unique</span>(toilets<span class="sc">$</span>Accessibility))</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>handicap_filter <span class="ot">&lt;-</span> <span class="fu">dccChecklist</span>(</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'handicap-filter'</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>  <span class="at">options =</span> handicap_options,</span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>  <span class="at">value =</span> handicap_options <span class="co">#default, choose all</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>)</span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>baby_options <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">unique</span>(toilets<span class="sc">$</span>BabyFacilities))</span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>baby_filter <span class="ot">&lt;-</span> <span class="fu">dccChecklist</span>(</span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">'baby-filter'</span>,</span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a>  <span class="at">options =</span> baby_options,</span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a>  <span class="at">value =</span> baby_options <span class="co">#default, choose all</span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a>)</span></code></pre></div>
+<p>We assign the graph to a new variable and give instructions for
+callback based on the input(s) we provided.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co">#Output component(s)</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>toilets_map <span class="ot">&lt;-</span> <span class="fu">dccGraph</span>(<span class="at">id =</span> <span class="st">'toilets-map'</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co">#Callback(s)</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>app <span class="sc">|&gt;</span> <span class="fu">add_callback</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">output</span>(<span class="st">'toilets-map'</span>, <span class="st">'figure'</span>),</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>    <span class="co">#input('district-dropdown', 'value'),</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    <span class="fu">input</span>(<span class="st">'price-filter'</span>, <span class="st">'value'</span>),</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>    <span class="fu">input</span>(<span class="st">'handicap-filter'</span>, <span class="st">'value'</span>),</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>    <span class="fu">input</span>(<span class="st">'baby-filter'</span>, <span class="st">'value'</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>  ),</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>  <span class="cf">function</span>(price_input, handicap_input, baby_input) { <span class="co">#district_input</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>    <span class="co">#function(color_input) {</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>    toilets <span class="ot">&lt;-</span> toilets <span class="sc">|&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>      <span class="fu">filter</span>(Free <span class="sc">%in%</span> price_input) <span class="sc">|&gt;</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>      <span class="fu">filter</span>(Accessibility <span class="sc">%in%</span> handicap_input) <span class="sc">|&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a>      <span class="fu">filter</span>(BabyFacilities <span class="sc">%in%</span> baby_input)</span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>    fig <span class="ot">=</span> toilets <span class="sc">|&gt;</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a>      <span class="fu">filter</span>(District <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a>      <span class="fu">plot_ly</span>(<span class="at">lat =</span> <span class="sc">~</span>Latitude, <span class="at">lon =</span> <span class="sc">~</span>Longitude, <span class="at">type =</span> <span class="st">"scattermapbox"</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>              <span class="at">split =</span> <span class="sc">~</span>District, <span class="at">size =</span> <span class="dv">5</span>, <span class="co">#toilets[[color_input]]</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a>              <span class="at">hoverinfo =</span> <span class="st">"text+name"</span>, <span class="at">hovertext =</span> <span class="sc">~</span>Street) <span class="sc">|&gt;</span></span>
+<span id="cb9-24"><a href="#cb9-24" tabindex="-1"></a>      <span class="fu">layout</span>(</span>
+<span id="cb9-25"><a href="#cb9-25" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Berlin public toilets"</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" tabindex="-1"></a>        <span class="at">mapbox =</span> <span class="fu">list</span>(</span>
+<span id="cb9-27"><a href="#cb9-27" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">'open-street-map'</span>,</span>
+<span id="cb9-28"><a href="#cb9-28" tabindex="-1"></a>          <span class="at">zoom =</span> <span class="dv">10</span>,</span>
+<span id="cb9-29"><a href="#cb9-29" tabindex="-1"></a>          <span class="at">center =</span> <span class="fu">list</span>(<span class="at">lat =</span> <span class="sc">~</span><span class="fu">median</span>(Latitude), <span class="at">lon =</span> <span class="sc">~</span><span class="fu">median</span>(Longitude)))</span>
+<span id="cb9-30"><a href="#cb9-30" tabindex="-1"></a>      )</span>
+<span id="cb9-31"><a href="#cb9-31" tabindex="-1"></a>    <span class="fu">return</span>(fig) <span class="co">#not needed but just to be explicit</span></span>
+<span id="cb9-32"><a href="#cb9-32" tabindex="-1"></a>  }</span>
+<span id="cb9-33"><a href="#cb9-33" tabindex="-1"></a>)</span></code></pre></div>
+<p>We also need to define the aesthetics of the dashboard:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co">#3 Front-end layout</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>layout_elements <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="fu">h1</span>(<span class="st">"IDS Workshop - Plotly-Dash test"</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="fu">div</span>(<span class="st">"Using the Berlin Public Toilets dataset to test Scatter Map functionality..."</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>  <span class="fu">div</span>(<span class="st">"Type:"</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>  price_filter,</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  <span class="fu">div</span>(<span class="st">"Accessibility:"</span>),</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>  handicap_filter,</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>  <span class="fu">div</span>(<span class="st">"Baby facilities:"</span>),</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>  baby_filter,</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>  toilets_map</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>)</span></code></pre></div>
+<p>Finally, we run the app:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co">#4 Main app</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>app <span class="sc">|&gt;</span> <span class="fu">set_layout</span>(layout_elements)</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>app <span class="sc">|&gt;</span> <span class="fu">run_app</span>()</span></code></pre></div>
+<p>We can also add additional filters to the data, as and when
+required.</p>
+<p><strong>Q.3.</strong> Find the distribution of paid public toilets in
+Berlin, that are also handicapped accessible and have a changing
+table.</p>
+<p><strong>Q.4.</strong> You have just submitted the materials for the
+IDS workshop on Monday and it is officially the end of the mid-term exam
+week. You go out with your friends to grab a few beers. And the weather
+is really cold. Are there any free toilets in Mitte that you could use
+after a grabbing some drinks with your friends?</p>
+</div>
+</div>
+<div id="thank-you" class="section level1">
+<div name="Thank_you" data-unique="Thank_you"></div><h1>Thank you!</h1>
+<p><br></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
+
+<svg id="js-plotly-tester" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="position: absolute; left: -10000px; top: -10000px; width: 9000px; height: 9000px; z-index: 1;"><path class="js-reference-point" d="M0,0H1V1H0Z" style="stroke-width: 0px; fill: black;"></path></svg></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
