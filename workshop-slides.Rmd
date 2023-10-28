@@ -100,7 +100,7 @@ In this contex, with Plotly we refer to the R package for to create interactive 
 ### Advantages of using Plotly
 
 --
-- Seamless integration with R and `ggplot2`, through the `ggplotly()` function, that converts your static plots to an interactive web-based version!
+- Seamless integration with R and `ggplot2`, through the `ggplotly` function, that converts your static plots to an interactive web-based version!
 
 --
 - Diverse range of plots and customization (wide array of chart types with extensive customization options), as well as the possibility to zoom in and out into the plot, or select a certain part of the plot and explore it specifically. Users can pan, zoom, and hover over the plots to get more information.
@@ -110,10 +110,30 @@ In this contex, with Plotly we refer to the R package for to create interactive 
 
 ---
 # Plotly
-### How does it work? Main features.
+### Main distinctive features: the building blocks! `r emo::ji("hammer")`
+<br>
+Plotly's main feature is interactivity! It is achieved by a couple of operations within the `plot_ly` function:
+* **data**: a data frame (what a surprise!)
+* **x and y**: the variables for the x and y axes, respectively 
+* **type**: the type of plot you want to create (e.g. "scatter", "bar", "box", etc).
+* **mode**: determines whether the scatter plot should show "markers", "lines", "text", or a combination thereof
+* **color**: specifies the color of data points or lines. This can be used to distinguish between different groups or represent a 
+      continuous variable
 
+Nothing really interactive until now...
 
+---
+# Plotly
+### Main distinctive features: the building blocks! `r emo::ji("hammer")`
+<br>
+... What enables interaction:
+* **Hovertext & Tooltip**:
+    - *Hovertext*: This is the text that appears when a user hovers over a specific data point or element in a Plotly plot. It's essentially a string or array of strings associated with each data point.
 
+    - *Tooltip*: This is the box or interface that displays the hovertext. While "hovertext" refers specifically to the text content, "tooltip" encompasses the overall appearance and context of the hover information.
+    
+These can be highly customized: more info [here](https://plotly.com/r/hover-text-and-formatting/) for `plot_ly` and [here](https://plotly.com/ggplot2/hover-text-and-formatting/) for `ggplot2`, using `ggplotly`.
+    
 ---
 # Plotly
 ### Some visualization examples.
