@@ -29,7 +29,6 @@ Data visualization is a powerful mean to understand complex data and communicate
 
 The tools we are going to introduce today serve exactly this purpose, enhancing the visualization possibilities offered by other static visualization packages such as `ggplot2`. 
 
-
 **What tools allow to do so?**
 
 Plotly and Dash! And we will introduce both!
@@ -46,18 +45,19 @@ Indeed, `plotly` and `dash` are interactive, in the sense that the user can inte
 
 Both `plotly` and `dash` are interactive, but we can say that the level of interaction is different: `plotly` appears very similar to a static plot, with the difference that we can hover your cursor over it, accessing further data. `dash` on the other hand, creates proper dashboards, namely HTML apps, allowing even more interaction.
 
+
 <br>
+
 # Plotly
-### Main distinctive features: the building blocks! `r emo::ji("hammer")`
+### Main distinctive features
+
 Plotly's main feature is interactivity! It is achieved by a couple of operations within the `plot_ly` function:
 
---
-* **data**: a data frame (what a surprise!)
-* **x and y**: the variables for the x and y axes, respectively 
-* **type**: the type of plot you want to create (e.g. "scatter", "bar", "box", etc).
-* **mode**: determines whether the scatter plot should show "markers", "lines", "text", or a combination thereof
-* **color**: specifies the color of data points or lines. This can be used to distinguish between different groups or represent a 
-      continuous variable
+- **data**: a data frame (what a surprise!) \n
+- **x and y**: the variables for the x and y axes, respectively \n
+- **type**: the type of plot you want to create (e.g. "scatter", "bar", "box", etc) \n
+- **mode**: determines whether the scatter plot should show "markers", "lines", "text", or a combination thereof \n
+- **color**: specifies the color of data points or lines. This can be used to distinguish between different groups or represent a continuous variable \n
 
 Nothing really interactive until now...
 
@@ -65,7 +65,7 @@ Nothing really interactive until now...
 
 ... What enables interaction:
 
-* **Hovertext & Tooltip**:
+- **Hovertext & Tooltip**:
     - *Hovertext*: This is the text that appears when a user hovers over a specific data point or element in a Plotly plot. It's essentially a string or array of strings associated with each data point.
     - *Tooltip*: This is the box or interface that displays the hovertext. While "hovertext" refers specifically to the text content, "tooltip" encompasses the overall appearance and context of the hover information.
  
@@ -73,7 +73,7 @@ These can be highly customized: more info [here](https://plotly.com/r/hover-text
 
 <br>   
 
-### Let's see some examples and exercises
+## Examples and exercises
 
 Many people are surprised that one is required to pay for using the public toilets in Berlin. Let's find out how far you would need to go to use a free toilet after a couple of beers with your friends.
 
@@ -152,7 +152,7 @@ toilets <- toilets |>
       ))
 ```
 
-## Put you answer here:
+Put you answer here:
 
 ```{r}
 #Plot the distribution using plotly:
@@ -173,12 +173,16 @@ toilets |> filter(District != "NA") |>
 (Hint: Use package "GGally" to generate a parallel coordinates plot. Beware of NA's!)
 
 ```{r}
+# Prepare the data
 beers_original <- read.csv("./data/beers.csv")
 
 beers_test <- beers_original |>
   filter(ibu != "NA") |>
   slice(1:20)
+```
 
+Put your answer here:
+```{r}
 p <- ggparcoord(beers_test,
                 columns = 3:4, groupColumn = 6,
                 scale = "uniminmax",
@@ -194,7 +198,6 @@ p <- ggparcoord(beers_test,
   xlab("")
 
 ggplotly(p)
-
 ```
 
 ### Third: A bubble chart!
@@ -235,7 +238,7 @@ agg_data_2 <- beers %>%
     )
 ```
 
-## Put you answer here:
+Put you answer here:
 ```{r}
 # Create the bubble chart 
 plot <- plot_ly(data = agg_data_2, x = ~abv, y = ~average_ibu, 
@@ -275,7 +278,7 @@ Essentially, when changing a dropdown or move a slider, a callback updates a cha
 - **Integration with Plotly** visualizations: Plotly charts can be easily included in Dash, making them part of an    
     interactive dashboard where each component can talk to others.
 
-### Some visualization examples.
+### A Nice Example
 
 We will use the same toilets dataset.
 
