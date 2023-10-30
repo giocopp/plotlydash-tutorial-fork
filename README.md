@@ -79,10 +79,6 @@ Here's a short list of resources if you want to dig deeper:
 
 - [Interactive web-based data visualization with R](https://plotly-r.com/) - If you are really thunderstruck by interactive visualization, check out this book!
 
-<<<<<<< HEAD
-
-## 📚 Contribution
-=======
  <br>
  
 ## ⚖️ License
@@ -94,7 +90,6 @@ The material in this repository is made available under the [MIT license](http:/
 ## 👋 Statement of contributions
 
 *Giorgio, Gayatri, and Lonny* wrote the code for Plotly, GGPlotly, and Dash, and prepared the presentation and practice material together. They contributed equally to all workshop materials
->>>>>>> aca3a5c694d9bb40ecaa4a17457a14c891e9fd01
 
 <br>
 
