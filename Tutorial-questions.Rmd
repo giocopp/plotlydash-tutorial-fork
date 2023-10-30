@@ -21,7 +21,6 @@ institute: Hertie School
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-pacman::p_load(tidyverse, readr, ggplot2, plotly, dash, GGally, hrbrthemes)
 ```
 
 <br>
@@ -78,8 +77,12 @@ Let's use this dataset for the public toilets in Berlin: [Berlin Public Toilet D
 **Q.1.** Find out the district-wise distribution of public toilets across Berlin.
 
 ```{r}
+# Install and load packages
+pacman::p_load(tidyverse, readr, ggplot2, plotly, dash, GGally, hrbrthemes)
+```
 
-#1. Prepare data
+```{r}
+# Prepare data
 toilets <- read.csv("./data/berliner-toiletten-standorte.csv")
 
 str(toilets) #tibble
@@ -87,9 +90,9 @@ str(toilets) #tibble
 toilets <- toilets |>
         mutate(Free = if_else(Price == 0, "free", "paid"))
 
-#Filter the districts based on postal codes:
+# Filter the districts based on postal codes:
 
-#Sources
+# Sources
 #1. Wikipedia - https://simple.wikipedia.org/wiki/Postal_codes_in_Germany
 #2. Cybo - https://postal-codes.cybo.com/germany/berlin/
 
@@ -141,7 +144,7 @@ toilets <- toilets |>
 ## Put you answer here:
 
 ```{r}
-#Plot the distribution using plotly:
+# Plot the distribution using plotly:
 
 ```
 
@@ -152,13 +155,16 @@ toilets <- toilets |>
 (Hint: Use package "GGally" to generate a parallel coordinates plot. Beware of NA's!)
 
 ```{r}
+# Prepare data
 beers_original <- read.csv("./data/beers.csv")
 
 beers_test <- beers_original |>
   filter(ibu != "NA") |>
   slice(1:20)
-
-# Put your answer here:
+```
+## Put you answer here:
+```{r}
+# Create the plot 
 
 ```
 
@@ -177,7 +183,7 @@ Try to code a bubble chart according to these instructions:
 
 Use the following data:
 ```{r}
-# Create the bubble chart
+# Prepare the data
 beers <- beers_original |>
   mutate(style_group = case_when(
     (str_detect(style, "IPA") ~ "IPA"),
