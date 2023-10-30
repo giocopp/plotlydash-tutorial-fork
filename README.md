@@ -78,5 +78,8 @@ Here's a short list of resources if you want to dig deeper:
 
 - [Interactive web-based data visualization with R](https://plotly-r.com/) - If you are really thunderstruck by interactive visualization, check out this book!
 
+
+## 📚 Contribution
+
 <br>
 

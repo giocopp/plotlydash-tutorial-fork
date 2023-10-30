@@ -47,22 +47,34 @@ Indeed, `plotly` and `dash` are interactive, in the sense that the user can inte
 
 Both `plotly` and `dash` are interactive, but we can say that the level of interaction is different: `plotly` appears very similar to a static plot, with the difference that we can hover your cursor over it, accessing further data. `dash` on the other hand, creates proper dashboards, namely HTML apps, allowing even more interaction.
 
+<br>
 
 # Plotly
-### What is Plotly?
+### Main distinctive features: the building blocks! `r emo::ji("hammer")`
 
-Plotly is actually a company headquartered in Montreal, Canada, providing online graphing, analytics, and statistics tools, as well as scientific graphing libraries for Python, R, MATLAB, Perl, Julia, Arduino, JavaScript and REST.
-    
-In this context, with Plotly we refer to the R package for to create interactive graphs.
+Plotly's main feature is interactivity! It is achieved by a couple of operations within the `plot_ly` function:
 
+--
+* **data**: a data frame (what a surprise!)
+* **x and y**: the variables for the x and y axes, respectively 
+* **type**: the type of plot you want to create (e.g. "scatter", "bar", "box", etc).
+* **mode**: determines whether the scatter plot should show "markers", "lines", "text", or a combination thereof
+* **color**: specifies the color of data points or lines. This can be used to distinguish between different groups or represent a 
+      continuous variable
 
-### Advantages of using Plotly
+Nothing really interactive until now...
 
-- Seamless integration with R and `ggplot2`, through the `ggplotly()` function, that converts your static plots to an interactive web-based version!
+<br>
 
-- Diverse range of plots and customization (wide array of chart types with extensive customization options), as well as the possibility to zoom in and out into the plot, or select a certain part of the plot and explore it specifically.
+... What enables interaction:
 
-- HTML web integration of graphs, makes visualization more accessible and intuitive. 
+* **Hovertext & Tooltip**:
+    - *Hovertext*: This is the text that appears when a user hovers over a specific data point or element in a Plotly plot. It's essentially a string or array of strings associated with each data point.
+    - *Tooltip*: This is the box or interface that displays the hovertext. While "hovertext" refers specifically to the text content, "tooltip" encompasses the overall appearance and context of the hover information.
+ 
+These can be highly customized: more info [here](https://plotly.com/r/hover-text-and-formatting/) for `plot_ly` and [here](https://plotly.com/ggplot2/hover-text-and-formatting/) for `ggplot2`, using `ggplotly`.
+
+<br>   
 
 ### Let's see some examples and exercises
 
