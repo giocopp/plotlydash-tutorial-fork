@@ -10,8 +10,9 @@ We will dive into the fascinating world of interactive data visualization with t
 <br>
 
 ## 📑 Contents
-- **Presentation Slides** [[.html]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop-slides.html) [[.Rmd]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop-slides.Rmd)
-- **Live Tutorial** [[.html]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop_presentation.html) [[.Rmd]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop_presentation.Rmd)
+- **Presentation Slides** [[.html]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/workshop-slides.html) [[.Rmd]](https://github.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/blob/main/workshop-slides.Rmd)
+- **Live Tutorial** [[.Rmd]](https://github.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/blob/main/Tutorial-questions.Rmd)
+- **Live Tutorial Solutions** [[.html]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/Tutorial-solutions.html) 
 - **Data** [[Breweries and Beers by Style and US State]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/data/beers.csv) [[Berlin Public Toilet]](https://raw.githack.com/intro-to-data-science-23-workshop/10-plotlydash-coppola-shejwal-chen/main/data/berliner-toiletten-standorte.csv)
 
 <br>
@@ -78,8 +79,22 @@ Here's a short list of resources if you want to dig deeper:
 
 - [Interactive web-based data visualization with R](https://plotly-r.com/) - If you are really thunderstruck by interactive visualization, check out this book!
 
+<<<<<<< HEAD
 
 ## 📚 Contribution
+=======
+ <br>
+ 
+## ⚖️ License
+
+The material in this repository is made available under the [MIT license](http://opensource.org/licenses/mit-license.php). 
+
+ <br>
+
+## 👋 Statement of contributions
+
+*Giorgio, Gayatri, and Lonny* wrote the code for Plotly, GGPlotly, and Dash, and prepared the presentation and practice material together. They contributed equally to all workshop materials
+>>>>>>> aca3a5c694d9bb40ecaa4a17457a14c891e9fd01
 
 <br>
 

@@ -21,8 +21,6 @@ institute: Hertie School
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-
-pacman::p_load(tidyverse, readr, ggplot2, plotly, dash, GGally, hrbrthemes)
 ```
 
 <br>
@@ -89,7 +87,12 @@ Let's use this dataset for the public toilets in Berlin: [Berlin Public Toilet D
 **Q.1.** Find out the district-wise distribution of public toilets across Berlin.
 
 ```{r}
+# load the necessary packages
+pacman::p_load(tidyverse, readr, ggplot2, plotly, dash, GGally, hrbrthemes)
 
+```
+
+```{r}
 #1. Prepare data
 toilets <- read.csv("./data/berliner-toiletten-standorte.csv")
 
@@ -209,7 +212,7 @@ Try to code a bubble chart according to these instructions:
 
 Use the following data:
 ```{r}
-# Create the bubble chart
+# Prepare the data
 beers <- beers_original |>
   mutate(style_group = case_when(
     (str_detect(style, "IPA") ~ "IPA"),
@@ -323,7 +326,6 @@ baby_filter <- dccChecklist(
 We assign the graph to a new variable and give instructions for callback based on the input(s) we provided.
 
 ```{r}
-
 #Output component(s)
 toilets_map <- dccGraph(id = 'toilets-map')
 
